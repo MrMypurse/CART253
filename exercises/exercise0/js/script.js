@@ -12,6 +12,7 @@ author, and this description to match your project!
 //
 // Description of preload
 
+
 function preload() {
 
 }
@@ -97,11 +98,6 @@ function setup() {
   ellipse(315,325,10,10);
   fill(255,200);
   ellipse(325,290,15,15);
-
-
-
-
-
 
 
 }
