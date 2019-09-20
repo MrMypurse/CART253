@@ -7,28 +7,38 @@ A simple dodging game with keyboard controls
 
 ******************************************************/
 
+//load avatar images and background images
+let img1;
+let img2;
+let img3;
+
 // The position and size of our avatar circle
 let avatarX;
 let avatarY;
-let avatarSize = 50;
+let avatarSize = 70;
 
 // The speed and velocity of our avatar circle
-let avatarSpeed = 10;
+let avatarSpeed = 5;
 let avatarVX = 0;
 let avatarVY = 0;
 
 // The position and size of the enemy circle
 let enemyX;
 let enemyY;
-let enemySize = 50;
+let enemySize = 70;
 
 // The speed and velocity of our enemy circle
-let enemySpeed = 7;
+let enemySpeed = 8;
 let enemyVX = 5;
 
 // How many dodges the player has made
 let scores = 0;
 
+function preload(){
+  img1 = loadImage("assets/images/background.png");
+  img2 = loadImage("assets/images/turtle.png");
+  img3 = loadImage("assets/images/trash.png");
+}
 
 // setup()
 //
@@ -55,8 +65,8 @@ function setup() {
 // Handle moving the avatar and enemy and checking for dodges and
 // game over situations.
 function draw() {
-  // A pink background
-  background(128,191,255);
+  // An image as background
+   image(img1, 0, 0, [500], [500]);
 
 
   // Default the avatar's velocity to 0 in case no key is pressed this frame
@@ -132,15 +142,21 @@ function draw() {
 
   // Display the number of successful dodges in the console
   console.log(scores);
+  //display score
+  print(str("scores"));
+  textSize(16);
+  fill(255);
+  text(scores, 450, 450);
 
   // The player is black
   fill(0);
-  // Draw the player as a circle
-  ellipse(avatarX,avatarY,avatarSize,avatarSize);
+  // Draw the player as a turtle
+  image (img2, avatarX,avatarY,[avatarSize],[avatarSize]);
 
   // The enemy is red
   fill(255,0,0);
   // Draw the enemy as a circle
-  ellipse(enemyX,enemyY,enemySize,enemySize);
+  image (img3,enemyX,enemyY,[enemySize],[enemySize]);
+
 
 }
