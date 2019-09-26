@@ -36,6 +36,10 @@ let numDecoys = 100;
 // Keep track of whether they've won
 let gameOver = false;
 
+//The position of the instruction
+let insX = 1200;
+let insY = 80;
+
 // preload()
 //
 // Loads the target and decoy images before the program starts
@@ -62,6 +66,7 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
   background("#ffff00");
   imageMode(CENTER);
+
 
   // Use a for loop to draw as many decoys as we need
   for (let i = 0; i < numDecoys; i++) {
@@ -112,8 +117,20 @@ function setup() {
 
   // And draw it (because it's the last thing drawn, it will always be on top)
   image(targetImage,targetX,targetY);
-}
 
+
+ //add instruction in the right top corner
+ rectMode(CENTER);
+  fill(92, 255, 138);
+  stroke(255);
+  strokeWeight(5);
+  rect(insX,insY,150,150);
+
+  image(targetImage,insX,insY);
+  fill(255);
+  noStroke();
+  text('CHIEN PERDU!!!',insX-40, insY+60);
+}
 
 // draw()
 //
