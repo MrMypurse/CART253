@@ -49,6 +49,10 @@ let eatHealth = 10;
 // Number of prey eaten during the game (the "score")
 let preyEaten = 0;
 
+//time
+let tx = 10;
+let ty = 20;
+
 // setup()
 //
 // Sets up the basic elements of the game
@@ -145,24 +149,14 @@ function movePlayer() {
   playerX = playerX + playerVX;
   playerY = playerY + playerVY;
 
-  // Wrap when player goes off the canvas
-  if (playerX < 0) {
-    // Off the left side, so add the width to reset to the right
-    playerX = playerX + width;
+  // Bounces when player goes off the canvas
+  if (playerX - playerRadius/2 < 0 || playerX + playerRadius/2 > width) {
+    playerVX = - playerVX;
   }
-  else if (playerX > width) {
-    // Off the right side, so subtract the width to reset to the left
-    playerX = playerX - width;
+  if (playerY - playerRadius/2 < 0 || playerY +playerRadius/2 > height) {
+    playerVY = - playerVY;
   }
-
-  if (playerY < 0) {
-    // Off the top, so add the height to reset to the bottom
-    playerY = playerY + height;
-  }
-  else if (playerY > height) {
-    // Off the bottom, so subtract the height to reset to the top
-    playerY = playerY - height;
-  }
+  //sprintingAbility();
 }
 
 // updateHealth()
@@ -201,8 +195,8 @@ function checkEating() {
     // Check if the prey died (health 0)
     if (preyHealth === 0) {
       // Move the "new" prey to a random position
-      preyX = random(0, width);
-      preyY = random(0, height);
+      preyX = random(width);
+      preyY = random(height);
       // Give it full health
       preyHealth = preyMaxHealth;
       // Track how many prey were eaten
@@ -224,27 +218,23 @@ function movePrey() {
     //
     // Use map() to convert from the 0-1 range of the random() function
     // to the appropriate range of velocities for the prey
-    preyVX = map(random(), 0, 1, -preyMaxSpeed, preyMaxSpeed);
-    preyVY = map(random(), 0, 1, -preyMaxSpeed, preyMaxSpeed);
+    preyVX = map(noise(tx), 0,1,-7,7);
+    preyVY = map(noise(ty), 0,1,-7,7);
+    tx += 0.05;
+    ty += 0.05;
+
   }
 
   // Update prey position based on velocity
   preyX = preyX + preyVX;
   preyY = preyY + preyVY;
 
-  // Screen wrapping
-  if (preyX < 0) {
-    preyX = preyX + width;
+  // make prey bounce when it touches the screen
+  if (preyX - preyRadius/2 < 0 || preyX + preyRadius/2 > width) {
+    preyVX = - preyVX;
   }
-  else if (preyX > width) {
-    preyX = preyX - width;
-  }
-
-  if (preyY < 0) {
-    preyY = preyY + height;
-  }
-  else if (preyY > height) {
-    preyY = preyY - height;
+  if (preyY - preyRadius/2 < 0 || preyY +preyRadius/2 > height) {
+    preyVY = - preyVY;
   }
 }
 
@@ -279,3 +269,15 @@ function showGameOver() {
   // Display it in the centre of the screen
   text(gameOverText, width / 2, height / 2);
 }
+
+//function sprintingAbility(){
+//  if (keyIsDown(SHIFT)){
+//    let playerMaxSpeed = 4;
+//    playerHealth = playerHealth - 0.8;
+//  }
+//  else{
+//    movePlayer();
+//    updateHealth();
+//  }
+
+//}

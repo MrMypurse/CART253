@@ -39,8 +39,8 @@ let numDecoys = 100;
 let gameOver = false;
 
 //The position of the instruction
-let insX = 1200;
-let insY = 80;
+let insX = window.innerWidth - 60;
+let insY = 50;
 
 // preload()
 //
@@ -85,23 +85,12 @@ function draw() {
     noStroke();
     fill(random(255));
 
-    // Tell them they won!
-    //text("YOU WINNED!",width/2,height/2);
-
-    // Draw a circle around the sausage dog to show where it is (even though
-    // they already know because they found it!)
-    //noFill();
-    //stroke(random(255));
-    //strokeWeight(10);
-    //ellipse(targetX,targetY,targetImage.width,targetImage.height);
-
     //make the targe image move after winning
     targetX += map(noise(tx),0,1,-5,5);
     targetY += map(noise(ty),0,1,-5,5);
     tx += 0.05;
     ty += 0.05;
     image(targetImage,targetX,targetY);
-
 
   }
 }
@@ -138,48 +127,52 @@ function mousePressed() {
      let y = random(0,height);
      // Generate a random number we can use for probability
      let r = random();
+     let ImgWidth = random(100,150);
+     let ImgHeight = random(100,150);
      // Use the random number to display one of the ten decoy
      // images, each with a 10% chance of being shown
      // We'll talk more about this nice quality of random soon enough.
      // But basically each "if" and "else if" has a 10% chance of being true
      if (r < 0.1) {
-       image(decoyImage1,x,y);
+       image(decoyImage1,x,y, ImgWidth, ImgHeight);
      }
      else if (r < 0.2) {
-       image(decoyImage2,x,y);
+       image(decoyImage2,x,y, ImgWidth, ImgHeight);
      }
      else if (r < 0.3) {
-       image(decoyImage3,x,y);
+       image(decoyImage3,x,y, ImgWidth, ImgHeight);
      }
      else if (r < 0.4) {
-       image(decoyImage4,x,y);
+       image(decoyImage4,x,y, ImgWidth, ImgHeight);
      }
      else if (r < 0.5) {
-       image(decoyImage5,x,y);
+       image(decoyImage5,x,y,ImgWidth, ImgHeight);
      }
      else if (r < 0.6) {
-       image(decoyImage6,x,y);
+       image(decoyImage6,x,y,ImgWidth, ImgHeight);
      }
      else if (r < 0.7) {
-       image(decoyImage7,x,y);
+       image(decoyImage7,x,y,ImgWidth, ImgHeight);
      }
      else if (r < 0.8) {
-       image(decoyImage8,x,y);
+       image(decoyImage8,x,y,ImgWidth, ImgHeight);
      }
      else if (r < 0.9) {
-       image(decoyImage9,x,y);
+       image(decoyImage9,x,y,ImgWidth, ImgHeight);
      }
      else if (r < 1.0) {
-       image(decoyImage10,x,y);
+       image(decoyImage10,x,y,ImgWidth, ImgHeight);
      }
    }
 
+   //define the target image's width and height
+   let targetWidth = 100;
+   let targetHeight = 100;
    // Once we've displayed all decoys, we choose a random location for the target
    targetX = random(0,width);
    targetY = random(0,height);
-
    // And draw it (because it's the last thing drawn, it will always be on top)
-   image(targetImage,targetX,targetY);
+   image(targetImage,targetX,targetY,targetWidth,targetHeight);
 
 
   //add instruction in the right top corner(top layer)
@@ -193,6 +186,6 @@ function mousePressed() {
    textSize(16);
    fill(255);
    noStroke();
-   text('CHIEN PERDU!!!',insX-40, insY+60);
+   text('CHIEN PERDU',insX-40, insY+60);
 
  }
