@@ -17,11 +17,12 @@ random movement, screen wrap.
 
 // Track whether the game is over
 let gameOver = false;
+let gameStart = false;
 
 // Player position, size, velocity
 let playerX;
 let playerY;
-let playerRadius = 25;
+let playerRadius = 40;
 let playerVX = 0;
 let playerVY = 0;
 let playerMaxSpeed = 2;
@@ -29,12 +30,12 @@ let playerMaxSpeed = 2;
 let playerHealth;
 let playerMaxHealth = 255;
 // Player fill color
-let playerFill = 50;
+let playerFill = 255;
 
 // Prey position, size, velocity
 let preyX;
 let preyY;
-let preyRadius = 25;
+let preyRadius = 40;
 let preyVX;
 let preyVY;
 let preyMaxSpeed = 4;
@@ -42,7 +43,7 @@ let preyMaxSpeed = 4;
 let preyHealth;
 let preyMaxHealth = 100;
 // Prey fill color
-let preyFill = 200;
+let preyFill = 255;
 
 // Amount of health obtained per frame of "eating" (overlapping) the prey
 let eatHealth = 10;
@@ -50,15 +51,34 @@ let eatHealth = 10;
 let preyEaten = 0;
 
 //time
-let tx = 10;
-let ty = 20;
+let tx=10;
+let ty=5;
+
+//images
+let playerImage;
+let preyImage;
+let backgroundImage;
+let gameoverImage;
+let menuImage;
+
+
+
+function preload() {
+  playerImage = loadImage("assets/images/cat.png");
+  preyImage = loadImage("assets/images/chicken.png");
+  backgroundImage = loadImage("assets/images/BG2.png");
+  gameoverImage = loadImage("assets/images/gameover.png");
+  menuImage = loadImage("assets/images/menu.png")
+}
+
+
 
 // setup()
 //
 // Sets up the basic elements of the game
 function setup() {
   createCanvas(500, 500);
-
+  imageMode(CENTER);
   noStroke();
 
   // We're using simple functions to separate code out
@@ -70,8 +90,8 @@ function setup() {
 //
 // Initialises prey's position, velocity, and health
 function setupPrey() {
-  preyX = width / 5;
-  preyY = height / 2;
+  preyX = width / 3;
+  preyY = height / 3;
   preyVX = -preyMaxSpeed;
   preyVY = preyMaxSpeed;
   preyHealth = preyMaxHealth;
@@ -81,7 +101,7 @@ function setupPrey() {
 //
 // Initialises player position and health
 function setupPlayer() {
-  playerX = 4 * width / 5;
+  playerX = width / 2;
   playerY = height / 2;
   playerHealth = playerMaxHealth;
 }
@@ -94,7 +114,8 @@ function setupPlayer() {
 // displays the two agents.
 // When the game is over, shows the game over screen.
 function draw() {
-  background(100, 100, 200);
+  background(0);
+  image(backgroundImage, 250, 250, 500, 500);
 
   if (!gameOver) {
     handleInput();
@@ -138,6 +159,12 @@ function handleInput() {
   else {
     playerVY = 0;
   }
+
+  //Sprinting abilities
+  if (keyIsDown(SHIFT)){
+    playerMaxSpeed = playerMaxSpeed + 2;
+    playerHealth = playerHealth - 0.7;
+  }
 }
 
 // movePlayer()
@@ -149,14 +176,24 @@ function movePlayer() {
   playerX = playerX + playerVX;
   playerY = playerY + playerVY;
 
-  // Bounces when player goes off the canvas
-  if (playerX - playerRadius/2 < 0 || playerX + playerRadius/2 > width) {
-    playerVX = - playerVX;
+  // Wrap when player goes off the canvas
+  if (playerX - playerRadius/2 < 0) {
+    // Off the left side, so it bounces back
+    playerX = - playerX;
   }
-  if (playerY - playerRadius/2 < 0 || playerY +playerRadius/2 > height) {
-    playerVY = - playerVY;
+  else if (playerX + playerRadius/2 > width) {
+    // Off the right side, so it bounces back
+    playerX = - playerX;
   }
-  //sprintingAbility();
+
+  if (playerY - playerRadius/2 < 0) {
+    // Off the top, so it bounces back
+    playerY = - playerY;
+  }
+  else if (playerY - playerRadius/2 > height) {
+    // Off the bottom, so it bounces back
+    playerY = - playerY;
+  }
 }
 
 // updateHealth()
@@ -195,8 +232,8 @@ function checkEating() {
     // Check if the prey died (health 0)
     if (preyHealth === 0) {
       // Move the "new" prey to a random position
-      preyX = random(width);
-      preyY = random(height);
+      preyX = random(0, width);
+      preyY = random(0, height);
       // Give it full health
       preyHealth = preyMaxHealth;
       // Track how many prey were eaten
@@ -208,7 +245,7 @@ function checkEating() {
 // movePrey()
 //
 // Moves the prey based on random velocity changes
-function movePrey() {
+function movePrey(){
   // Change the prey's velocity at random intervals
   // random() will be < 0.05 5% of the time, so the prey
   // will change direction on 5% of frames
@@ -218,8 +255,8 @@ function movePrey() {
     //
     // Use map() to convert from the 0-1 range of the random() function
     // to the appropriate range of velocities for the prey
-    preyVX = map(noise(tx), 0,1,-7,7);
-    preyVY = map(noise(ty), 0,1,-7,7);
+    preyVX = map(noise(tx), 0,1,-5,5);
+    preyVY = map(noise(ty), 0,1,-5,5);
     tx += 0.05;
     ty += 0.05;
 
@@ -242,42 +279,30 @@ function movePrey() {
 //
 // Draw the prey as an ellipse with alpha based on health
 function drawPrey() {
-  fill(preyFill, preyHealth);
-  ellipse(preyX, preyY, preyRadius * 2);
+  tint(255, preyHealth);
+  image(preyImage, preyX, preyY, preyRadius * 2, preyRadius * 2);
 }
 
 // drawPlayer()
 //
 // Draw the player as an ellipse with alpha value based on health
 function drawPlayer() {
-  fill(playerFill, playerHealth);
-  ellipse(playerX, playerY, playerRadius * 2);
+  tint(255, playerHealth);
+  image(playerImage, playerX, playerY, playerRadius * 2, playerRadius * 2);
 }
 
 // showGameOver()
 //
 // Display text about the game being over!
 function showGameOver() {
-  // Set up the font
+  // Set up the font and image
   textSize(32);
   textAlign(CENTER, CENTER);
-  fill(0);
+  fill(187, 237, 201);
   // Set up the text to display
-  let gameOverText = "GAME OVER\n"; // \n means "new line"
-  gameOverText = gameOverText + "You ate " + preyEaten + " prey\n";
-  gameOverText = gameOverText + "before you died."
+  let gameOverText = "It was a good life...\n  I guess..."; // \n means "new line"
+  //gameOverText = gameOverText + "You ate " + preyEaten + " chicken\n";
+  //gameOverText = gameOverText + "before you starved to death."
   // Display it in the centre of the screen
   text(gameOverText, width / 2, height / 2);
 }
-
-//function sprintingAbility(){
-//  if (keyIsDown(SHIFT)){
-//    let playerMaxSpeed = 4;
-//    playerHealth = playerHealth - 0.8;
-//  }
-//  else{
-//    movePlayer();
-//    updateHealth();
-//  }
-
-//}
