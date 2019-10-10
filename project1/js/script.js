@@ -41,12 +41,12 @@ let preyVY;
 let preyMaxSpeed = 4;
 // Prey health
 let preyHealth;
-let preyMaxHealth = 100;
+let preyMaxHealth = 50;
 // Prey fill color
 let preyFill = 255;
 
 // Amount of health obtained per frame of "eating" (overlapping) the prey
-let eatHealth = 10;
+let eatHealth = 15;
 // Number of prey eaten during the game (the "score")
 let preyEaten = 0;
 
@@ -114,12 +114,15 @@ function setupPlayer() {
 // displays the two agents.
 // When the game is over, shows the game over screen.
 function draw() {
-  background(0);
-  image(backgroundImage, 250, 250, 500, 500);
+  if (gameStart === false){
+      image(menuImage, 250, 250, 500, 500);
+  }
 
-  if (!gameOver) {
+
+  if(gameStart === true){
+    background(0);
+    image(backgroundImage, 250, 250, 500, 500);
     handleInput();
-
     movePlayer();
     movePrey();
 
@@ -129,11 +132,16 @@ function draw() {
     drawPrey();
     drawPlayer();
   }
-  else {
+
+
+  if (gameOver) {
     showGameOver();
   }
 }
 
+function mousePressed(){
+    gameStart = true;
+}
 // handleInput()
 //
 // Checks arrow keys and adjusts player velocity accordingly
@@ -162,8 +170,8 @@ function handleInput() {
 
   //Sprinting abilities
   if (keyIsDown(SHIFT)){
-    playerMaxSpeed = playerMaxSpeed + 2;
-    playerHealth = playerHealth - 0.7;
+    playerMaxSpeed = 5;
+    playerHealth = playerHealth - 1;
   }
 }
 
@@ -173,27 +181,29 @@ function handleInput() {
 // wraps around the edges.
 function movePlayer() {
   // Update position
-  playerX = playerX + playerVX;
-  playerY = playerY + playerVY;
+  let nextplayerX = playerX + playerVX;
+  let nextplayerY = playerY + playerVY;
 
   // Wrap when player goes off the canvas
-  if (playerX - playerRadius/2 < 0) {
+  if (nextplayerX - playerRadius/2 < 0) {
     // Off the left side, so it bounces back
-    playerX = - playerX;
+    nextplayerX = playerX;
   }
-  else if (playerX + playerRadius/2 > width) {
+  else if (nextplayerX + playerRadius/2 > width) {
     // Off the right side, so it bounces back
-    playerX = - playerX;
+    nextplayerX = playerX;
   }
 
-  if (playerY - playerRadius/2 < 0) {
+  if (nextplayerY - playerRadius/2 < 0) {
     // Off the top, so it bounces back
-    playerY = - playerY;
+    nextplayerY = playerY;
   }
-  else if (playerY - playerRadius/2 > height) {
+  else if (nextplayerY - playerRadius/2 > height) {
     // Off the bottom, so it bounces back
-    playerY = - playerY;
+    nextplayerY = playerY;
   }
+  playerX = nextplayerX;
+  playerY = nextplayerY;
 }
 
 // updateHealth()
@@ -219,6 +229,16 @@ function checkEating() {
   // Get distance of player to prey
   let d = dist(playerX, playerY, preyX, preyY);
   // Check if it's an overlap
+  if (preyHealth <= 0) {
+    // Move the "new" prey to a random position
+    preyX = random(0, width);
+    preyY = random(0, height);
+    // Give it full health
+    preyHealth = preyMaxHealth;
+    // Track how many prey were eaten
+    preyEaten = preyEaten + 1;
+  }
+
   if (d < playerRadius + preyRadius) {
     // Increase the player health
     playerHealth = playerHealth + eatHealth;
@@ -228,9 +248,9 @@ function checkEating() {
     preyHealth = preyHealth - eatHealth;
     // Constrain to the possible range
     preyHealth = constrain(preyHealth, 0, preyMaxHealth);
-
+    console.log (preyHealth);
     // Check if the prey died (health 0)
-    if (preyHealth === 0) {
+    if (preyHealth <= 0) {
       // Move the "new" prey to a random position
       preyX = random(0, width);
       preyY = random(0, height);
@@ -279,23 +299,36 @@ function movePrey(){
 //
 // Draw the prey as an ellipse with alpha based on health
 function drawPrey() {
+  push();
   tint(255, preyHealth);
   image(preyImage, preyX, preyY, preyRadius * 2, preyRadius * 2);
+  pop();
 }
 
 // drawPlayer()
 //
 // Draw the player as an ellipse with alpha value based on health
 function drawPlayer() {
+  push();
   tint(255, playerHealth);
   image(playerImage, playerX, playerY, playerRadius * 2, playerRadius * 2);
+  pop();
 }
+
+
+function endGame(){
+  if(gameOver === true);
+  showGameOver();
+}
+
+
 
 // showGameOver()
 //
 // Display text about the game being over!
 function showGameOver() {
   // Set up the font and image
+  background(0);
   textSize(32);
   textAlign(CENTER, CENTER);
   fill(187, 237, 201);
