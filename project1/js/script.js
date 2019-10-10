@@ -133,6 +133,7 @@ function draw() {
     drawPlayer();
   }
 
+    console.log (preyHealth);
 
   if (gameOver) {
     showGameOver();
@@ -229,16 +230,6 @@ function checkEating() {
   // Get distance of player to prey
   let d = dist(playerX, playerY, preyX, preyY);
   // Check if it's an overlap
-  if (preyHealth <= 0) {
-    // Move the "new" prey to a random position
-    preyX = random(0, width);
-    preyY = random(0, height);
-    // Give it full health
-    preyHealth = preyMaxHealth;
-    // Track how many prey were eaten
-    preyEaten = preyEaten + 1;
-  }
-
   if (d < playerRadius + preyRadius) {
     // Increase the player health
     playerHealth = playerHealth + eatHealth;
@@ -248,7 +239,7 @@ function checkEating() {
     preyHealth = preyHealth - eatHealth;
     // Constrain to the possible range
     preyHealth = constrain(preyHealth, 0, preyMaxHealth);
-    console.log (preyHealth);
+
     // Check if the prey died (health 0)
     if (preyHealth <= 0) {
       // Move the "new" prey to a random position
