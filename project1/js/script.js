@@ -221,6 +221,13 @@ function updateHealth() {
     // If so, the game is over
     gameOver = true;
   }
+  if (preyHealth <= 0) {
+    // Move the "new" prey to a random position
+    preyX = random(0, width);
+    preyY = random(0, height);
+    // Give it full health
+    preyHealth = preyMaxHealth;
+    }
 }
 
 // checkEating()
@@ -313,20 +320,19 @@ function endGame(){
 }
 
 
-
 // showGameOver()
 //
 // Display text about the game being over!
 function showGameOver() {
   // Set up the font and image
   background(0);
-  textSize(32);
+  image(gameoverImage, 250, 250, 500, 500);
+  textSize(12);
   textAlign(CENTER, CENTER);
   fill(187, 237, 201);
   // Set up the text to display
-  let gameOverText = "It was a good life...\n  I guess..."; // \n means "new line"
-  //gameOverText = gameOverText + "You ate " + preyEaten + " chicken\n";
-  //gameOverText = gameOverText + "before you starved to death."
+  let gameOverText;
+  gameOverText ="You ate " + preyEaten.toString() + " chicken\n" +"before you starved to death";
   // Display it in the centre of the screen
-  text(gameOverText, width / 2, height / 2);
+  text(gameOverText, width / 2, height * 0.75);
 }
