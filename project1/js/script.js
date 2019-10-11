@@ -3,10 +3,13 @@
 /******************************************************
 
 Game - Chaser
-Pippin Barr
+Base code - Pippin Barr
+Programmer - Janet Sun
+Art - Janet Sun
+Sound - Lemoncreme(www.freesound.org)
 
-A "simple" game of cat and mouse. The player is a circle and can move with keys,
-if they overlap the (randomly moving) prey they "eat it" by sucking out its life
+A "simple" game of a hungry cat. The player is a kitten and can move with keys,
+if they overlap the chicken leg they can eat by sucking out its energy
 and adding it to their own. The player "dies" slowly over time so they have to keep
 eating to stay alive.
 
@@ -41,7 +44,7 @@ let preyVY;
 let preyMaxSpeed = 4;
 // Prey health
 let preyHealth;
-let preyMaxHealth = 50;
+let preyMaxHealth = 110;
 // Prey fill color
 let preyFill = 255;
 
@@ -61,6 +64,10 @@ let backgroundImage;
 let gameoverImage;
 let menuImage;
 
+//sound
+let meow;
+let crunch;
+let piano;
 
 
 function preload() {
@@ -68,7 +75,10 @@ function preload() {
   preyImage = loadImage("assets/images/chicken.png");
   backgroundImage = loadImage("assets/images/BG2.png");
   gameoverImage = loadImage("assets/images/gameover.png");
-  menuImage = loadImage("assets/images/menu.png")
+  menuImage = loadImage("assets/images/menu.png");
+  meow = loadSound("assets/sounds/meow.wav");
+  crunch = loadSound("assets/sounds/crunch.wav");
+  piano = loadSound("assets/sounds/piano.wav");
 }
 
 
@@ -84,6 +94,7 @@ function setup() {
   // We're using simple functions to separate code out
   setupPrey();
   setupPlayer();
+  piano.loop();
 }
 
 // setupPrey()
@@ -133,8 +144,6 @@ function draw() {
     drawPlayer();
   }
 
-    console.log (preyHealth);
-
   if (gameOver) {
     showGameOver();
   }
@@ -142,6 +151,7 @@ function draw() {
 
 function mousePressed(){
     gameStart = true;
+    meow.play();
 }
 // handleInput()
 //
@@ -221,6 +231,8 @@ function updateHealth() {
     // If so, the game is over
     gameOver = true;
   }
+
+  preyHealth = preyHealth - 0.6;
   if (preyHealth <= 0) {
     // Move the "new" prey to a random position
     preyX = random(0, width);
@@ -256,6 +268,7 @@ function checkEating() {
       preyHealth = preyMaxHealth;
       // Track how many prey were eaten
       preyEaten = preyEaten + 1;
+      crunch.play();
     }
   }
 }
@@ -314,9 +327,13 @@ function drawPlayer() {
 }
 
 
+// game ends
 function endGame(){
   if(gameOver === true);
   showGameOver();
+  preyMaxSpeed = 0;
+  playerMaxSpeed = 0;
+  crunch.stop();
 }
 
 
