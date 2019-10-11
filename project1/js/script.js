@@ -14,7 +14,7 @@ and adding it to their own. The player "dies" slowly over time so they have to k
 eating to stay alive.
 
 Includes: Physics-based movement, keyboard controls, health/stamina,
-random movement, screen wrap.
+noise movement, screen bouncing, sprinting ability, cute sound effects.
 
 ******************************************************/
 
@@ -97,6 +97,8 @@ function setup() {
   piano.loop();
 }
 
+
+
 // setupPrey()
 //
 // Initialises prey's position, velocity, and health
@@ -108,6 +110,8 @@ function setupPrey() {
   preyHealth = preyMaxHealth;
 }
 
+
+
 // setupPlayer()
 //
 // Initialises player position and health
@@ -116,6 +120,8 @@ function setupPlayer() {
   playerY = height / 2;
   playerHealth = playerMaxHealth;
 }
+
+
 
 // draw()
 //
@@ -129,17 +135,14 @@ function draw() {
       image(menuImage, 250, 250, 500, 500);
   }
 
-
   if(gameStart === true){
     background(0);
     image(backgroundImage, 250, 250, 500, 500);
     handleInput();
     movePlayer();
     movePrey();
-
     updateHealth();
     checkEating();
-
     drawPrey();
     drawPlayer();
   }
@@ -149,10 +152,15 @@ function draw() {
   }
 }
 
+
+//to start game by pressing on the mouse
 function mousePressed(){
     gameStart = true;
     meow.play();
 }
+
+
+
 // handleInput()
 //
 // Checks arrow keys and adjusts player velocity accordingly
@@ -182,9 +190,12 @@ function handleInput() {
   //Sprinting abilities
   if (keyIsDown(SHIFT)){
     playerMaxSpeed = 5;
-    playerHealth = playerHealth - 1;
+    playerHealth = playerHealth - 1.2;
   }
 }
+
+
+
 
 // movePlayer()
 //
@@ -217,6 +228,9 @@ function movePlayer() {
   playerY = nextplayerY;
 }
 
+
+
+
 // updateHealth()
 //
 // Reduce the player's health (happens every frame)
@@ -231,7 +245,7 @@ function updateHealth() {
     // If so, the game is over
     gameOver = true;
   }
-
+  //Reduce prey's health
   preyHealth = preyHealth - 0.6;
   if (preyHealth <= 0) {
     // Move the "new" prey to a random position
@@ -241,6 +255,8 @@ function updateHealth() {
     preyHealth = preyMaxHealth;
     }
 }
+
+
 
 // checkEating()
 //
@@ -272,6 +288,8 @@ function checkEating() {
     }
   }
 }
+
+
 
 // movePrey()
 //
@@ -306,6 +324,8 @@ function movePrey(){
   }
 }
 
+
+
 // drawPrey()
 //
 // Draw the prey as an ellipse with alpha based on health
@@ -316,6 +336,8 @@ function drawPrey() {
   pop();
 }
 
+
+
 // drawPlayer()
 //
 // Draw the player as an ellipse with alpha value based on health
@@ -325,6 +347,7 @@ function drawPlayer() {
   image(playerImage, playerX, playerY, playerRadius * 2, playerRadius * 2);
   pop();
 }
+
 
 
 // game ends
