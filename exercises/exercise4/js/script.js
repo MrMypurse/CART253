@@ -198,13 +198,13 @@ function ballIsOutOfBounds() {
   // Check for ball going off the sides
   if (ball.x <= 0){
     rightScore = rightScore + 1;
-    ball.vx = - ball.vx;
     return true;
+    ball.vx = - ball.vx;
   }
   else if (ball.x >= width){
     leftScore = leftScore + 1;
-    ball.vx = - ball.vx;
     return true;
+    ball.vx = - ball.vx;
     }
   else {
     return false;
@@ -285,6 +285,14 @@ function resetBall() {
   ball.y = height / 2;
   ball.vx = ball.speed;
   ball.vy = ball.speed;
+  if (ball.x > 0){
+    ball.speed = -ball.vx;
+    ball.launchVY = ball.speed;
+  }
+  else {
+    ball.vx = ball.speed;
+    ball.vy = ball.speed;
+  }
 }
 
 // displayStartMessage()
