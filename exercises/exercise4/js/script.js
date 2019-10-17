@@ -12,9 +12,11 @@
 // Whether the game has started
 let playing = false;
 
-// Game colors (using hexadecimal)
+// Game colors
 let bgColor = 0;
 let fgColor = 255;
+let leftPaddleColor = 255;
+let rightPaddleColor = 255;
 
 // BALL
 
@@ -26,7 +28,8 @@ let ball = {
   size: 20,
   vx: 0,
   vy: 0,
-  speed: 5
+  speed: 5,
+  launchVY: 10
 }
 
 // PADDLES
@@ -61,6 +64,11 @@ let rightPaddle = {
 
 // A variable to hold the beep sound we will play on bouncing
 let beepSFX;
+
+//A variable to keep the score of both sides
+let leftScore = 0;
+let rightScore = 0;
+
 
 // preload()
 //
@@ -137,6 +145,10 @@ function draw() {
   displayPaddle(leftPaddle);
   displayPaddle(rightPaddle);
   displayBall();
+
+
+  console.log(leftScore);
+  console.log(rightScore);
 }
 
 // handleInput()
@@ -184,12 +196,20 @@ function updateBall() {
 // Returns true if so, false otherwise
 function ballIsOutOfBounds() {
   // Check for ball going off the sides
-  if (ball.x < 0 || ball.x > width) {
+  if (ball.x <= 0){
+    rightScore = rightScore + 1;
+    ball.vx = - ball.vx;
     return true;
   }
+  else if (ball.x >= width){
+    leftScore = leftScore + 1;
+    ball.vx = - ball.vx;
+    return true;
+    }
   else {
     return false;
   }
+
 }
 
 // checkBallWallCollision()
@@ -284,4 +304,15 @@ function displayStartMessage() {
 // Which will help us be allowed to play audio in the browser
 function mousePressed() {
   playing = true;
+}
+
+function displayScore(){
+  if(leftScore > 5 || rightScore > 5){
+    ball.speed = ball.speed + 2;
+    paddle.speed = paddle.speed +2;
+  }
+  if(leftScore > 10 || rightScore > 10){
+    ball.speed = ball.speed + 4;
+    paddle.speed = paddle.speed + 4;
+  }
 }
