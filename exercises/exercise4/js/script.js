@@ -1,13 +1,13 @@
 "use strict";
 
-// Pong
+// Spooky Pong
 // by Pippin Barr
+// by Janet Sun
+// A "simple" implementation of Pong with a scoring system: the higher the score, the smaller the paddle will become
+// Play the game with the keyboard and spook your conponant
 //
-// A "simple" implementation of Pong with no scoring system
-// just the ability to play the game with the keyboard.
-//
-// Up and down keys control the right hand paddle, W and S keys control
-// the left hand paddle
+// Up and down keys control the right hand paddle,
+// W and S keys control the left hand paddle
 
 // Whether the game has started
 let playing = false;
