@@ -13,8 +13,8 @@
 let playing = false;
 
 // Game colors
-let bgColor = 0;
-let fgColor = 255;
+let bgColor;
+let fgColor;
 let leftPaddleColor = 255;
 let rightPaddleColor = 255;
 
@@ -83,6 +83,10 @@ function preload() {
 // Sets initial values for paddle and ball positions
 // and velocities.
 function setup() {
+  //set up colors
+  bgColor = color(235, 97, 35);
+  fgColor = color(68, 50, 125);
+
   // Create canvas and set drawing modes
   createCanvas(640, 480);
   rectMode(CENTER);
@@ -308,7 +312,7 @@ function displayStartMessage() {
   push();
   textAlign(CENTER, CENTER);
   textSize(32);
-  text("CLICK ME", width / 2, height / 2);
+  text("CLICK TO SPOOK ", width / 2, height / 2);
   pop();
 }
 
@@ -329,25 +333,27 @@ function displayScore(){
 //stop game and display result when one of the player reaches 13 points
 function winGame(){
   if (leftScore >= 13) {
-    background(0);
+    background(bgColor);
     leftPaddle.speed = 0;
     rightPaddle.speed = 0;
     ball.speed = 0;
     push();
     textAlign(CENTER, CENTER);
     textSize(32);
-    text("THE LEFT IS THE SUPERIOR", width / 2, height / 2);
+    textLeading(30);
+    text("THE RIGHT SIDE IS \n" + "THE SPOOKIEST AFTER ALL", width / 2, height / 2);
     pop();
   }
-  if (leftScore >= 13) {
-    background(0);
+  else if (rightScore >= 13) {
+    background(bgColor);
     leftPaddle.speed = 0;
     rightPaddle.speed = 0;
     ball.speed = 0;
     push();
     textAlign(CENTER, CENTER);
     textSize(32);
-    text("THE RIGHT IS THE SUPERIOR", width / 2, height / 2);
+    textLeading(30);
+    text("THE RIGHT SIDE IS \n" + "THE SPOOKIEST AFTER ALL", width / 2, height / 2);
     pop();
   }
 }
