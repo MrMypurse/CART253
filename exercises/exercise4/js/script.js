@@ -146,6 +146,12 @@ function draw() {
   displayPaddle(rightPaddle);
   displayBall();
 
+  // display the scores of the player by increasing the ball speed and the player's speed
+  displayScore();
+
+  //end the game and display result when one of the player reaches 13 points
+  winGame();
+
 
   console.log(leftScore);
   console.log(rightScore);
@@ -302,7 +308,7 @@ function displayStartMessage() {
   push();
   textAlign(CENTER, CENTER);
   textSize(32);
-  text("CLICK TO START", width / 2, height / 2);
+  text("CLICK ME", width / 2, height / 2);
   pop();
 }
 
@@ -314,13 +320,34 @@ function mousePressed() {
   playing = true;
 }
 
+//displaying the score by changing the paddle size (the higher the score, the smaller the paddle)
 function displayScore(){
-  if(leftScore > 5 || rightScore > 5){
-    ball.speed = ball.speed + 2;
-    paddle.speed = paddle.speed +2;
+  leftPaddle.h = 80 - leftScore * 4;
+  rightPaddle.h = 80 - rightScore * 4;
+}
+
+//stop game and display result when one of the player reaches 13 points
+function winGame(){
+  if (leftScore >= 13) {
+    background(0);
+    leftPaddle.speed = 0;
+    rightPaddle.speed = 0;
+    ball.speed = 0;
+    push();
+    textAlign(CENTER, CENTER);
+    textSize(32);
+    text("THE LEFT IS THE SUPERIOR", width / 2, height / 2);
+    pop();
   }
-  if(leftScore > 10 || rightScore > 10){
-    ball.speed = ball.speed + 4;
-    paddle.speed = paddle.speed + 4;
+  if (leftScore >= 13) {
+    background(0);
+    leftPaddle.speed = 0;
+    rightPaddle.speed = 0;
+    ball.speed = 0;
+    push();
+    textAlign(CENTER, CENTER);
+    textSize(32);
+    text("THE RIGHT IS THE SUPERIOR", width / 2, height / 2);
+    pop();
   }
 }
