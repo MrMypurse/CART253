@@ -11,7 +11,7 @@ let creeper;
 // The three prey
 let sheep;
 let cow;
-let chicken;
+let pig;
 
 // setup()
 //
@@ -19,10 +19,10 @@ let chicken;
 // Creates objects for the predator and three prey
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  creeper = new Predator(100, 100, 5, color(200, 200, 0), 40);
-  sheep= new Prey(100, 100, 10, color(255, 100, 10), 50);
-  cow = new Prey(100, 100, 8, color(255, 255, 255), 60);
-  chicken = new Prey(100, 100, 20, color(255, 255, 0), 10);
+  creeper = new Predator(100, 100, 5, color(0, 128, 0), 40);
+  sheep= new Prey(100, 100, 10, color(255,255,255), 50);
+  cow = new Prey(100, 100, 8, color(105, 105, 105), 60);
+  pig = new Prey(100, 100, 20, color(255, 182, 193), 10);
 }
 
 // draw()
@@ -39,16 +39,16 @@ function draw() {
   creeper.move();
   sheep.move();
   cow.move();
-  chicken.move();
+  pig.move();
 
   // Handle the tiger eating any of the prey
   creeper.handleEating(sheep);
   creeper.handleEating(cow);
-  creeper.handleEating(chicken);
+  creeper.handleEating(pig);
 
   // Display all the "animals"
   creeper.display();
   sheep.display();
   cow.display();
-  chicken.display();
+  pig.display();
 }

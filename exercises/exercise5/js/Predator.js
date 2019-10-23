@@ -32,6 +32,8 @@ class Predator {
     this.leftKey = LEFT_ARROW;
     this.rightKey = RIGHT_ARROW;
     this.runKey = SHIFT;
+    //scores(how many prey it has eaten)
+    this.score = 0;
   }
 
   // handleInput
@@ -120,7 +122,9 @@ class Predator {
       prey.health -= this.healthGainPerEat;
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
+        this.score = this.score + 1;
         prey.reset();
+        console.log(this.score);
       }
     }
   }
