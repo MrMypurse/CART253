@@ -31,6 +31,7 @@ class Predator {
     this.downKey = DOWN_ARROW;
     this.leftKey = LEFT_ARROW;
     this.rightKey = RIGHT_ARROW;
+    this.runKey = SHIFT;
   }
 
   // handleInput
@@ -57,6 +58,11 @@ class Predator {
     }
     else {
       this.vy = 0;
+    }
+    //Run movement
+    if(keyIsDown(this.runKey)){
+      this.vx = this.vx*2;
+      this.vy = this.vy*2;
     }
   }
 

@@ -6,12 +6,12 @@
 // The predator loses health over time, so must keep eating to survive.
 
 // Our predator
-let tiger;
+let creeper;
 
 // The three prey
-let antelope;
-let zebra;
-let bee;
+let sheep;
+let cow;
+let chicken;
 
 // setup()
 //
@@ -19,10 +19,10 @@ let bee;
 // Creates objects for the predator and three prey
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  tiger = new Predator(100, 100, 5, color(200, 200, 0), 40);
-  antelope = new Prey(100, 100, 10, color(255, 100, 10), 50);
-  zebra = new Prey(100, 100, 8, color(255, 255, 255), 60);
-  bee = new Prey(100, 100, 20, color(255, 255, 0), 10);
+  creeper = new Predator(100, 100, 5, color(200, 200, 0), 40);
+  sheep= new Prey(100, 100, 10, color(255, 100, 10), 50);
+  cow = new Prey(100, 100, 8, color(255, 255, 255), 60);
+  chicken = new Prey(100, 100, 20, color(255, 255, 0), 10);
 }
 
 // draw()
@@ -33,22 +33,22 @@ function draw() {
   background(0);
 
   // Handle input for the tiger
-  tiger.handleInput();
+  creeper.handleInput();
 
   // Move all the "animals"
-  tiger.move();
-  antelope.move();
-  zebra.move();
-  bee.move();
+  creeper.move();
+  sheep.move();
+  cow.move();
+  chicken.move();
 
   // Handle the tiger eating any of the prey
-  tiger.handleEating(antelope);
-  tiger.handleEating(zebra);
-  tiger.handleEating(bee);
+  creeper.handleEating(sheep);
+  creeper.handleEating(cow);
+  creeper.handleEating(chicken);
 
   // Display all the "animals"
-  tiger.display();
-  antelope.display();
-  zebra.display();
-  bee.display();
+  creeper.display();
+  sheep.display();
+  cow.display();
+  chicken.display();
 }
