@@ -7,12 +7,26 @@
 
 // Our predator
 let creeper;
+let creeperImg;
 
 // The three prey
 let sheep;
+let sheepImg;
 let cow;
+let cowImg;
 let pig;
+let pigImg;
 
+
+// preload()
+//
+//Preload sounds and images
+function preload(){
+  creeperImg = loadImage("assets/images/creeper.png");
+  sheepImg = loadImage("assets/images/sheep.png");
+  cowImg = loadImage("assets/images/cow.png");
+  pigImg = loadImage("assets/images/pig.png");
+}
 // setup()
 //
 // Sets up a canvas

@@ -34,6 +34,9 @@ class Predator {
     this.runKey = SHIFT;
     //scores(how many prey it has eaten)
     this.score = 0;
+    this.scoreText;
+    //image
+    this.creeperImg;
   }
 
   // handleInput
@@ -135,10 +138,11 @@ class Predator {
   // with a radius the same size as its current health.
   display() {
     push();
-    noStroke();
-    fill(this.fillColor);
+    textSize(20);
+    text("Creeper:" + this.scoreText, width/3 + 30, 30);
+    fill(0, 255, 255);
     this.radius = this.health;
-    ellipse(this.x, this.y, this.radius * 2);
+    image(creeperImg, this.x, this.y, this.radius * 2, this.radius * 2);
     pop();
   }
 }
