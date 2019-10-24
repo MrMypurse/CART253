@@ -37,6 +37,8 @@ class Predator {
     this.scoreText;
     //image and sound
     this.creeperImg;
+    this.zombieImg;
+    this.skeletonImg;
   }
 
   // handleInput
@@ -141,7 +143,7 @@ class Predator {
     textSize(24);
     fill(255, 255, 255);
     this.scoreText = "Creeper:  " + this.score.toString();
-    text(this.scoreText, width/5, 50);
+    text(this.scoreText, width/7, 50);
     this.radius = this.health;
     image(creeperImg, this.x, this.y, this.radius * 2, this.radius * 2);
     pop();
@@ -152,9 +154,20 @@ class Predator {
     textSize(24);
     fill(255, 255, 255);
     this.scoreText = "Zombie:  " + this.score.toString();
-    text(this.scoreText, width/2, 50);
+    text(this.scoreText, width/3, 50);
     this.radius = this.health;
     image(zombieImg, this.x, this.y, this.radius * 2, this.radius * 2);
+    pop();
+  }
+
+  displaySkeleton() {
+    push();
+    textSize(24);
+    fill(255, 255, 255);
+    this.scoreText = "Skeleton:  " + this.score.toString();
+    text(this.scoreText, width/2, 50);
+    this.radius = this.health;
+    image(skeletonImg, this.x, this.y, this.radius * 2, this.radius * 2);
     pop();
   }
 }

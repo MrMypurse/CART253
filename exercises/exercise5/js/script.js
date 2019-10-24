@@ -8,6 +8,7 @@
 // Our predator
 let creeper;
 let zombie;
+let skeleton;
 
 
 // The three prey
@@ -27,6 +28,7 @@ let backgroundImg;
 function preload(){
   creeperImg = loadImage("assets/images/creeper.png");
   zombieImg = loadImage("assets/images/zombie.png");
+  skeletonImg = loadImage("assets/images/skeleton.png");
   sheepImg = loadImage("assets/images/sheep.png");
   cowImg = loadImage("assets/images/cow.png");
   pigImg = loadImage("assets/images/pig.png");
@@ -41,6 +43,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   creeper = new Predator(100, 100, 5, color(0, 128, 0), 30);
   zombie = new Predator(300, 100, 5, color(0, 128, 0), 30);
+  skeleton = new Predator(500, 100, 5, color(0, 128, 0), 30);
   sheep= new Prey(100, 100, 10, color(255,255,255), 50);
   cow = new Prey(100, 100, 8, color(105, 105, 105), 60);
   pig = new Prey(100, 100, 20, color(255, 182, 193), 30);
@@ -56,9 +59,12 @@ function draw() {
   // Handle input for the tiger
   creeper.handleInput();
   zombie.handleInput();
+  skeleton.handleInput();
 
   // Move all the "animals"
   creeper.move();
+  zombie.move();
+  skeleton.move();
   sheep.move();
   cow.move();
   pig.move();
@@ -72,9 +78,14 @@ function draw() {
   zombie.handleEating(cow);
   zombie.handleEating(pig);
 
+  skeleton.handleEating(sheep);
+  skeleton.handleEating(cow);
+  skeleton.handleEating(pig);
+
   // Display all the "animals"
   creeper.displayCreeper();
   zombie.displayZombie();
+  skeleton.displaySkeleton();
   sheep.displaySheep();
   cow.displayCow();
   pig.displayPig();
