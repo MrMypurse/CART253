@@ -41,11 +41,11 @@ function preload(){
 // Creates objects for the predator and three prey
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  creeper = new Predator(100, 100, 5, color(0, 128, 0), 30);
-  zombie = new Predator(300, 100, 5, color(0, 128, 0), 30);
-  skeleton = new Predator(500, 100, 5, color(0, 128, 0), 30);
-  sheep= new Prey(100, 100, 10, color(255,255,255), 50);
-  cow = new Prey(100, 100, 8, color(105, 105, 105), 60);
+  creeper = new Predator(100, 100, 5, color(0, 128, 0), 40);
+  zombie = new Predator(300, 100, 5, color(0, 128, 0), 40);
+  skeleton = new Predator(500, 100, 5, color(0, 128, 0), 40);
+  sheep= new Prey(100, 100, 10, color(255,255,255), 30);
+  cow = new Prey(100, 100, 8, color(105, 105, 105), 30);
   pig = new Prey(100, 100, 20, color(255, 182, 193), 30);
 }
 
@@ -57,6 +57,7 @@ function draw() {
   background(backgroundImg);
 
   // Handle input for the tiger
+  creeper.directionKeycode1();
   creeper.handleInput();
   zombie.handleInput();
   skeleton.handleInput();
@@ -89,4 +90,10 @@ function draw() {
   sheep.displaySheep();
   cow.displayCow();
   pig.displayPig();
+
+  //end the game when predator's health is 0
+  creeper.endGame();
+  zombie.endGame();
+  skeleton.endGame();
+
 }

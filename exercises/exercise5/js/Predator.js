@@ -26,12 +26,7 @@ class Predator {
     // Display properties
     this.fillColor = fillColor;
     this.radius = this.health; // Radius is defined in terms of health
-    // Input properties
-    this.upKey = UP_ARROW;
-    this.downKey = DOWN_ARROW;
-    this.leftKey = LEFT_ARROW;
-    this.rightKey = RIGHT_ARROW;
-    this.runKey = SHIFT;
+
     //scores(how many prey it has eaten)
     this.score = 0;
     this.scoreText;
@@ -41,6 +36,15 @@ class Predator {
     this.skeletonImg;
   }
 
+//different key input for different predators
+  directionKeycode1(){
+    // Input properties
+    this.upKey = UP_ARROW;
+    this.downKey = DOWN_ARROW;
+    this.leftKey = LEFT_ARROW;
+    this.rightKey = RIGHT_ARROW;
+    this.runKey = SHIFT;
+  }
   // handleInput
   //
   // Checks if an arrow key is pressed and sets the predator's
@@ -67,7 +71,7 @@ class Predator {
       this.vy = 0;
     }
     //Run movement
-    if(keyIsDown(this.runKey)){
+    if (keyIsDown(this.runKey)){
       this.vx = this.vx*2;
       this.vy = this.vy*2;
     }
@@ -169,5 +173,12 @@ class Predator {
     this.radius = this.health;
     image(skeletonImg, this.x, this.y, this.radius * 2, this.radius * 2);
     pop();
+  }
+
+  endGame(){
+    if (this.health < 0){
+      background(0);
+      image(backgroundImg, windowWidth, windowHeight, 0 , 0);
+    }
   }
 }
