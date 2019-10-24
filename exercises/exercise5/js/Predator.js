@@ -10,7 +10,7 @@ class Predator {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, fillColor, radius) {
+  constructor(x, y, speed, radius) {
     // Position
     this.x = x;
     this.y = y;
@@ -24,7 +24,6 @@ class Predator {
     this.healthLossPerMove = 0.1;
     this.healthGainPerEat = 1;
     // Display properties
-    this.fillColor = fillColor;
     this.radius = this.health; // Radius is defined in terms of health
 
     //scores(how many prey it has eaten)
@@ -167,7 +166,9 @@ class Predator {
     this.scoreText = "Creeper:  " + this.score.toString();
     text(this.scoreText, width/7, 50);
     this.radius = this.health;
-    image(creeperImg, this.x, this.y, this.radius * 2, this.radius * 2);
+    if (this.radius > 1){
+      image(creeperImg, this.x, this.y, this.radius * 2, this.radius * 2);
+    }
     pop();
   }
 
@@ -178,7 +179,9 @@ class Predator {
     this.scoreText = "Zombie:  " + this.score.toString();
     text(this.scoreText, width/3, 50);
     this.radius = this.health;
-    image(zombieImg, this.x, this.y, this.radius * 2, this.radius * 2);
+    if (this.radius >1 ){
+      image(zombieImg, this.x, this.y, this.radius * 2, this.radius * 2);
+    }
     pop();
   }
 
@@ -189,13 +192,18 @@ class Predator {
     this.scoreText = "Skeleton:  " + this.score.toString();
     text(this.scoreText, width/2, 50);
     this.radius = this.health;
-    image(skeletonImg, this.x, this.y, this.radius * 2, this.radius * 2);
+    if (this.radius > 1 ){
+      image(skeletonImg, this.x, this.y, this.radius * 2, this.radius * 2);
+    }
     pop();
   }
 
-  endGame(){
-    if(this.health < 0){
-      gameOver = true;
+  isDead() {
+    if (this.health <= 0){
+      return true;
+    }
+    else {
+      return false;
     }
   }
 }
