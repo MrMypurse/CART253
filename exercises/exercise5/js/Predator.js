@@ -35,7 +35,7 @@ class Predator {
     //scores(how many prey it has eaten)
     this.score = 0;
     this.scoreText;
-    //image
+    //image and sound
     this.creeperImg;
   }
 
@@ -136,13 +136,25 @@ class Predator {
   //
   // Draw the predator as an ellipse on the canvas
   // with a radius the same size as its current health.
-  display() {
+  displayCreeper() {
     push();
-    textSize(20);
-    text("Creeper:" + this.scoreText, width/3 + 30, 30);
-    fill(0, 255, 255);
+    textSize(24);
+    fill(255, 255, 255);
+    this.scoreText = "Creeper:  " + this.score.toString();
+    text(this.scoreText, width/5, 50);
     this.radius = this.health;
     image(creeperImg, this.x, this.y, this.radius * 2, this.radius * 2);
+    pop();
+  }
+
+  displayZombie() {
+    push();
+    textSize(24);
+    fill(255, 255, 255);
+    this.scoreText = "Zombie:  " + this.score.toString();
+    text(this.scoreText, width/2, 50);
+    this.radius = this.health;
+    image(zombieImg, this.x, this.y, this.radius * 2, this.radius * 2);
     pop();
   }
 }

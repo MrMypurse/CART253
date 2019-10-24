@@ -72,12 +72,27 @@ class Prey {
   //
   // Draw the prey as an ellipse on the canvas
   // with a radius the same size as its current health.
-  display() {
+  displaySheep() {
     push();
     noStroke();
-    fill(this.fillColor);
     this.radius = this.health;
-    ellipse(this.x, this.y, this.radius * 2);
+    image(sheepImg, this.x, this.y, this.radius * 2, this.radius * 2);
+    pop();
+  }
+
+  displayCow() {
+    push();
+    noStroke();
+    this.radius = this.health;
+    image(cowImg, this.x, this.y, this.radius * 2, this.radius * 2);
+    pop();
+  }
+
+  displayPig() {
+    push();
+    noStroke();
+    this.radius = this.health;
+    image(pigImg, this.x, this.y, this.radius * 2, this.radius * 2);
     pop();
   }
 
