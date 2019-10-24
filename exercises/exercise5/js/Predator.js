@@ -45,6 +45,24 @@ class Predator {
     this.rightKey = RIGHT_ARROW;
     this.runKey = SHIFT;
   }
+
+  directionKeycode2(){
+    // Input properties
+    this.upKey = 87;
+    this.downKey = 83;
+    this.leftKey = 65;
+    this.rightKey = 68;
+    this.runKey = CONTROL;
+  }
+
+  directionKeycode3(){
+    // Input properties
+    this.upKey = 73;
+    this.downKey = 75;
+    this.leftKey = 74;
+    this.rightKey = 76;
+    this.runKey = 32;
+  }
   // handleInput
   //
   // Checks if an arrow key is pressed and sets the predator's
@@ -176,9 +194,8 @@ class Predator {
   }
 
   endGame(){
-    if (this.health < 0){
-      background(0);
-      image(backgroundImg, windowWidth, windowHeight, 0 , 0);
+    if(this.health < 0){
+      gameOver = true;
     }
   }
 }

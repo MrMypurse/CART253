@@ -22,6 +22,9 @@ let pigImg;
 //background
 let backgroundImg;
 
+//To end/ start the game
+let gameOver;
+
 // preload()
 //
 //Preload sounds and images
@@ -41,6 +44,7 @@ function preload(){
 // Creates objects for the predator and three prey
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  endGame = false;
   creeper = new Predator(100, 100, 5, color(0, 128, 0), 40);
   zombie = new Predator(300, 100, 5, color(0, 128, 0), 40);
   skeleton = new Predator(500, 100, 5, color(0, 128, 0), 40);
@@ -53,13 +57,20 @@ function setup() {
 //
 // Handles input, movement, eating, and displaying for the system's objects
 function draw() {
-  // Clear the background to black
+  // Clear the background
   background(backgroundImg);
+
+  // clear game if game is over
+  if (gameOver === true){
+    return;
+  }
 
   // Handle input for the tiger
   creeper.directionKeycode1();
   creeper.handleInput();
+  zombie.directionKeycode2();
   zombie.handleInput();
+  skeleton.directionKeycode3();
   skeleton.handleInput();
 
   // Move all the "animals"
@@ -91,9 +102,9 @@ function draw() {
   cow.displayCow();
   pig.displayPig();
 
-  //end the game when predator's health is 0
-  creeper.endGame();
-  zombie.endGame();
-  skeleton.endGame();
+ // End the game when predator dies
+ creeper.endGame();
+ zombie.endGame();
+ skeleton.endGame();
 
 }
