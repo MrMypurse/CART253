@@ -23,7 +23,7 @@ let bee;
 //
 // Sets up a canvas
 // Creates objects for the predator and three prey
-functionsetup() {
+function setup() {
   createCanvas(windowWidth, windowHeight);
   //////////////// FIXED
   tiger = new Predator(100, 100, 100, 5, color(200, 200, 0), 40);
