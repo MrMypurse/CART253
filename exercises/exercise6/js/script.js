@@ -15,7 +15,8 @@
 let tiger;
 
 // The three prey
-let antelop;
+//////////////// FIXED
+let antelope;
 let zebra;
 let bee;
 
@@ -23,6 +24,7 @@ let bee;
 //
 // Sets up a canvas
 // Creates objects for the predator and three prey
+//////////////// FIXED
 function setup() {
   createCanvas(windowWidth, windowHeight);
   //////////////// FIXED
