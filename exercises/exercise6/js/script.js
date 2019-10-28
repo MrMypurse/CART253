@@ -63,7 +63,8 @@ function draw() {
   tiger.display();
   //////////////// FIXED
   antelope.display();
-  zebra.disploy();
+  //////////////// FIXED
+  zebra.display();
   //////////////// FIXED
   bee.display();
 }
