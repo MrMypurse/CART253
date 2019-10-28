@@ -54,7 +54,8 @@ class Prey {
     // Handle wrapping
     //////////////// FIXED
     this.handleWrapping();
-
+    //////////////// FIXED
+  }
 
     // handleWrapping
     //
