@@ -31,6 +31,8 @@ class Predator {
     this.downKey = DOWN_ARROW;
     this.leftKey = LEFT_ARROW;
     this.rightKey = RIGHT_ARROW;
+    //Initial score
+    this.score = 0;
   }
 
   // handleInput
@@ -76,6 +78,8 @@ class Predator {
     this.handleWrapping();
   }
 
+
+
   // handleWrapping
   //
   // Checks if the predator has gone off the canvas and
@@ -114,8 +118,10 @@ class Predator {
       prey.health -= this.healthGainPerEat;
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
+        this.score = this.score + 1; 
         prey.reset();
       }
+      console.log(d);
     }
   }
 

@@ -1,4 +1,4 @@
-// Predator-Prey Simulation
+// HoneyBee Simulator
 // by Pippin Barr
 //
 // Creates a predator and three prey (of different sizes and speeds)
@@ -13,6 +13,15 @@ let lavender;
 let poppie;
 let sunflower;
 
+//Array for Prey
+let prey = [ ];
+
+//The 2 enemy
+let bugSpray;
+let bear;
+
+// keep score of how many flower the player has collected
+let score;
 
 // setup()
 //
@@ -20,10 +29,23 @@ let sunflower;
 // Creates objects for the predator and three prey
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
+  //create 1 bee(predator)
   bee = new Predator(100, 100, 5, color(252, 215, 3), 80);
-  lavender = new Prey(100, 100, 10, color(157, 94, 230), 30);
-  poppie = new Prey(100,100,10, color(255, 0, 0), 20);
-  sunflower = new Prey(100,100,10, color(237, 155, 47), 40);
+
+  //create 30 preys
+  for (let i = 0; i < 10; i++){
+      lavender = new Prey(random(0,width), random(0, height), 10, color(157, 94, 230), 20);
+      prey.push(lavender);
+  }
+  for (let i = 0; i < 10; i++){
+      poppie = new Prey(random(0,width), random(0, height), 10, color(255, 0, 0), 10);
+      prey.push(poppie);
+  }
+  for (let i = 0; i < 10; i++){
+      sunflower = new Prey(random(0,width), random(0, height), 10, color(237, 155, 47), 30);
+      prey.push(sunflower);
+  }
 }
 
 // draw()
@@ -31,26 +53,20 @@ function setup() {
 // Handles input, movement, eating, and displaying for the system's objects
 function draw() {
   // Clear the background to black
-  background(0);
+  background(255);
 
-  // Handle input for the
+  // Handle input for the bee
   bee.handleInput();
 
-  // Move all the "animals"
-  bee.move();
-  lavender.move();
-  poppie.move();
-  sunflower.move();
 
-  // Handle the bee eating any of the prey
-  bee.handleEating(lavender);
-  bee.handleEating(poppie);
-  bee.handleEating(sunflower);
-
-
-  // Display all the "animals"
+  // Move and Display all the "flowers" and the bee
   bee.display();
-  lavender.display();
-  poppie.display();
-  sunflower.display();
+  bee.move();
+  for (let i = 0; i < prey.length; i++){
+    prey[i].move();
+    // Handle the bee eating any of the prey
+    bee.handleEating(prey[i]);
+    prey[i].display();
+  }
+
 }
