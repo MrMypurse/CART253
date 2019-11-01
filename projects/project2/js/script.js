@@ -62,8 +62,10 @@ function draw() {
   background(255);
 
   //End game when predator is dead
-  //if (predator.isDead() === true){
+  //if (predator.death() === true){
   //  image(backgroundImg, 0, 0, windowWidth, windowHeight);
+  //  return;
+  //  else{}
 
   // Handle input for the bee
   bee.handleInput();

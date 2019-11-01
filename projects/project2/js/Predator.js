@@ -146,5 +146,6 @@ class Predator {
     else {
       return false;
     }
+    console.log(this.death);
   }
 }
