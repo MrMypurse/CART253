@@ -36,6 +36,7 @@ function setup() {
 
   //create 2 natural enemies
   bear = new NaturalEnemy (random(0,width), random(0, height), 10 , color(0), 30);
+  bugSpray = new AltimateEnemy (random(0,width), random(0, height), 20 , color(105,105,105), 30);
 
   //create 30 preys
   for (let i = 0; i < 10; i++){
@@ -72,6 +73,9 @@ function draw() {
   bear.display();
   bear.move();
   bear.handleAttack(bee);
+  bugSpray.display();
+  bugSpray.move();
+  bugSpray.handleAttack(bee);
 
   //Move all preys
   for (let i = 0; i < prey.length; i++){

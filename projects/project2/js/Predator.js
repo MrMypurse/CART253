@@ -122,6 +122,7 @@ class Predator {
         prey.reset();
       }
       console.log(this.health);
+      console.log(this.score);
     }
   }
 
