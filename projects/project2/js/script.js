@@ -13,8 +13,9 @@ let lavender;
 let poppie;
 let sunflower;
 
-//Array for Prey
+//Array for Prey and enemy
 let prey = [ ];
+let enemy = [ ];
 
 //The 2 enemy
 let bugSpray;
@@ -31,21 +32,25 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   //create 1 bee(predator)
-  bee = new Predator(100, 100, 5, color(252, 215, 3), 80);
+  bee = new Predator(100, 100, 3, color(252, 215, 3), 30);
+
+  //create 2 natural enemies
+  bear = new NaturalEnemy (random(0,width), random(0, height), 10 , color(0), 30);
 
   //create 30 preys
   for (let i = 0; i < 10; i++){
-      lavender = new Prey(random(0,width), random(0, height), 10, color(157, 94, 230), 20);
+      lavender = new Prey(random(0,width), random(0, height), 8, color(157, 94, 230), 15);
       prey.push(lavender);
   }
   for (let i = 0; i < 10; i++){
-      poppie = new Prey(random(0,width), random(0, height), 10, color(255, 0, 0), 10);
+      poppie = new Prey(random(0,width), random(0, height), 8, color(255, 0, 0), 10);
       prey.push(poppie);
   }
   for (let i = 0; i < 10; i++){
-      sunflower = new Prey(random(0,width), random(0, height), 10, color(237, 155, 47), 30);
+      sunflower = new Prey(random(0,width), random(0, height), 8, color(237, 155, 47), 20);
       prey.push(sunflower);
   }
+
 }
 
 // draw()
@@ -59,14 +64,23 @@ function draw() {
   bee.handleInput();
 
 
-  // Move and Display all the "flowers" and the bee
+  // Move the bee
   bee.display();
   bee.move();
+
+  //Move all enemies
+  bear.display();
+  bear.move();
+  bear.handleAttack(bee);
+
+  //Move all preys
   for (let i = 0; i < prey.length; i++){
     prey[i].move();
-    // Handle the bee eating any of the prey
+  // Handle the bee eating any of the prey
     bee.handleEating(prey[i]);
     prey[i].display();
   }
+
+
 
 }

@@ -1,38 +1,119 @@
-// Prey
+// NaturalEnemy
 //
-// A class that represents a simple prey that moves
+// A class that represents the predator's natural enemy that moves
 // on screen based on a noise() function. It can move around
-// the screen and be consumed by Predator objects.
+//consumes predator
 
-class NaturalEnemy extends Prey {
+class NaturalEnemy {
 
   // constructor
   //
-  // Sets the initial values for the Predator's properties
+  // Sets the initial values for the NaturalEnemy's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, fillColor, radius) {
-    super(x, y, speed, fillColor, radius);
-}
-//attacked
-//
-//Check if the predator overlap the enemy, if so, reduces the predator's health and the prey disappears
-// If the enemy dies, it gets reset.
-  handleAttack(predator){
-    // Calculate distance from this Enemy to the predator
-    let d = dist(this.x, this.y, predator.x, predator.y);
-    // Check if the distance is less than their two radii (an overlap)
-    if (d < this.radius + predator.radius) {
-      // Increase predator health and constrain it to its possible range
-      this.health += this.healthGainPerEat;
-      this.health = constrain(this.health, 0, this.maxHealth);
-      // Decrease predator health by the same amount
-      predator.health -= this.healthGainPerEat;
-      // Check if the prey died and reset it if so
-      if (predator.health <= 0) {
-        //gameover
+    // Position
+    this.x = x;
+    this.y = y;
+    // Velocity and speed
+    this.vx = 0;
+    this.vy = 0;
+    this.speed = speed;
+    // Time properties for noise() function
+    this.tx = random(0, 1000); // To make x and y noise different
+    this.ty = random(0, 1000); // we use random starting values
+    // Health properties
+    this.maxHealth = radius;
+    this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
+    this.healthLossPerMove = 0.05;
+    this.healthGainPerEat = 1;
+    // Display properties
+    this.fillColor = fillColor;
+    this.radius = this.health;
+  }
+
+  // move
+  //
+  // Sets velocity based on the noise() function and the NaturalEnemy's speed
+  // Moves based on the resulting velocity and handles wrapping
+  move() {
+    // Set velocity via noise()
+    this.vx = map(noise(this.tx), 0, 1, -this.speed, this.speed);
+    this.vy = map(noise(this.ty), 0, 1, -this.speed, this.speed);
+    // Update position
+    this.x += this.vx;
+    this.y += this.vy;
+    // Update time properties
+    this.tx += 0.01;
+    this.ty += 0.01;
+    // Handle wrapping
+    this.handleWrapping();
+  }
+
+
+
+    // handleWrapping
+    //
+    // Checks if the predator has gone off the canvas and
+    // wraps it to the other side if so
+    handleWrapping() {
+      // Off the left or right
+      if (this.x < 0) {
+        this.x += width;
+      }
+      else if (this.x > width) {
+        this.x -= width;
+      }
+      // Off the top or bottom
+      if (this.y < 0) {
+        this.y += height;
+      }
+      else if (this.y > height) {
+        this.y -= height;
       }
     }
 
 
+  handleAttack(predator){
+    // Calculate distance from this Enemy to the predator
+    let d2 = dist(this.x, this.y, predator.x, predator.y);
+    // Check if the distance is less than their two radii (an overlap)
+    if (d2 < this.radius + predator.radius) {
+    // Increase predator health and constrain it to its possible range
+      this.health += this.healthGainPerEat;
+      this.health = constrain(this.health, 0, this.maxHealth);
+   // Decrease predator health by the same amount
+      predator.health -= this.healthGainPerEat;
+   // Check if the prey died and reset it if so
+   //if (predator.health <= 0) {
+        //gameover
+    //  }
+    }
+}
+
+// display
+//
+// Draw the predator as an ellipse on the canvas
+// with a radius the same size as its current health.
+display() {
+  push();
+  noStroke();
+  fill(this.fillColor);
+  this.radius = this.health;
+  ellipse(this.x, this.y, this.radius * 2);
+  pop();
+}
+
+// reset
+//
+// Set the position to a random location and reset health
+// and radius back to default
+reset() {
+  // Random position
+  this.x = random(0, width);
+  this.y = random(0, height);
+  // Default health
+  this.health = this.maxHealth;
+  // Default radius
+  this.radius = this.health;
 }
 }
