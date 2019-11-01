@@ -91,6 +91,4 @@ function draw() {
     prey[i].display();
   }
 
-
-
 }
