@@ -138,4 +138,13 @@ class Predator {
     ellipse(this.x, this.y, this.radius * 2);
     pop();
   }
+
+  death() {
+    if (this.health <= 0){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }

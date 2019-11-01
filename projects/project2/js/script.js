@@ -32,7 +32,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   //create 1 bee(predator)
-  bee = new Predator(100, 100, 3, color(252, 215, 3), 30);
+  bee = new Predator(windowWidth/2, windowHeight/2, 3, color(252, 215, 3), 30);
 
   //create 2 natural enemies
   bear = new NaturalEnemy (random(0,width), random(0, height), 10 , color(0), 30);
@@ -60,6 +60,10 @@ function setup() {
 function draw() {
   // Clear the background to black
   background(255);
+
+  //End game when predator is dead
+  //if (predator.isDead() === true){
+  //  image(backgroundImg, 0, 0, windowWidth, windowHeight);
 
   // Handle input for the bee
   bee.handleInput();

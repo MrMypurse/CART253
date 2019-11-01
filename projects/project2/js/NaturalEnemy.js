@@ -25,7 +25,7 @@ class NaturalEnemy {
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
     this.healthLossPerMove = 0.05;
-    this.healthGainPerEat = 1;
+    this.healthGainPerEat = 0.5;
     // Display properties
     this.fillColor = fillColor;
     this.radius = this.health;
