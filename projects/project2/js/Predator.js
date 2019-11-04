@@ -119,6 +119,7 @@ class Predator {
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
         this.score = this.score + 1;
+        return;
         prey.reset();
       }
       console.log(this.health);

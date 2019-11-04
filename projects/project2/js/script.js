@@ -28,7 +28,7 @@ let bugSprayImg;
 let bearImg;
 
 // keep score of how many flower the player has collected
-let score;
+let honeyBar;
 
 
 // preload()
@@ -72,6 +72,9 @@ function setup() {
       prey.push(sunflower);
   }
 
+  //create the score bar
+  honeyBar = new ScoreBar(width-50, 50, color(252, 215, 3), 0);
+
 }
 
 // draw()
@@ -109,5 +112,7 @@ function draw() {
     bee.handleEating(prey[i]);
     prey[i].display();
   }
+
+  //display player's score on a side bar
 
 }
