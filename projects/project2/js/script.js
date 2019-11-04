@@ -5,24 +5,44 @@
 // The predator chases the prey using the arrow keys and consumes them.
 // The predator loses health over time, so must keep eating to survive.
 
-// Our predator
+// Our predator and its image
 let bee;
+let beeImg;
 
-// The three prey
+// The three prey and their images
 let lavender;
 let poppie;
 let sunflower;
+let lavenderImg;
+let poppieImg;
+let sunflowerImg;
 
 //Array for Prey and enemy
 let prey = [ ];
 let enemy = [ ];
 
-//The 2 enemy
+//The 2 enemy and their images
 let bugSpray;
 let bear;
+let bugSprayImg;
+let bearImg;
 
 // keep score of how many flower the player has collected
 let score;
+
+
+// preload()
+//
+//Preload sounds and images
+function preload(){
+  lavenderImg = loadImage("assets/images/lavender.png");
+  poppieImg = loadImage("assets/images/poppie.png");
+  sunflowerImg = loadImage("assets/images/sunflower.png");
+  bugSprayImg = loadImage("assets/images/bugSpray.png");
+  bearImg = loadImage("assets/images/bear.png");
+}
+
+
 
 // setup()
 //
@@ -38,16 +58,16 @@ function setup() {
   bear = new NaturalEnemy (random(0,width), random(0, height), 10 , color(0), 30);
   bugSpray = new AltimateEnemy (random(0,width), random(0, height), 20 , color(105,105,105), 30);
 
-  //create 30 preys
-  for (let i = 0; i < 10; i++){
+  //create 21 preys
+  for (let i = 0; i < 7; i++){
       lavender = new Prey(random(0,width), random(0, height), 8, color(157, 94, 230), 15);
       prey.push(lavender);
   }
-  for (let i = 0; i < 10; i++){
+  for (let i = 0; i < 7; i++){
       poppie = new Prey(random(0,width), random(0, height), 8, color(255, 0, 0), 10);
       prey.push(poppie);
   }
-  for (let i = 0; i < 10; i++){
+  for (let i = 0; i < 7; i++){
       sunflower = new Prey(random(0,width), random(0, height), 8, color(237, 155, 47), 20);
       prey.push(sunflower);
   }
@@ -69,7 +89,6 @@ function draw() {
 
   // Handle input for the bee
   bee.handleInput();
-
 
   // Move the bee
   bee.display();

@@ -135,7 +135,9 @@ class Predator {
     noStroke();
     fill(this.fillColor);
     this.radius = this.health;
-    ellipse(this.x, this.y, this.radius * 2);
+    if (this.radius > 1){
+        ellipse(this.x, this.y, this.radius * 2);
+    }
     pop();
   }
 
