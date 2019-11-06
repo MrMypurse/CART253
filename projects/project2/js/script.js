@@ -82,7 +82,7 @@ function setup() {
   }
 
   //create the score bar
-  honeyBar = new ScoreBar(width-50, 50, color(252, 215, 3), 0);
+  honeyBar = new ScoreBar(width/2, height/2, color(252, 215, 3), 30);
 
 }
 
@@ -124,15 +124,19 @@ function draw() {
       bee.handleEating(prey[i]);
       prey[i].display();
     }
+
     //display player's score on a side bar
     // check if player is dead
     bee.death();
 
+    // display score (honey bar)
+    honeyBar.display();
   }
 
   }
 }
 
+// start game when mouse is pressed
   function mousePressed(){
     startGame = true;
   }

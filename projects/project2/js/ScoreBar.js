@@ -9,14 +9,13 @@ class ScoreBar{
   //
   // Sets the initial values for the ScoreBar's properties
   // Either sets default values or uses the arguments provided
-    constructor(x, y, fillColor, width, height) {
+    constructor(x, y, fillColor, width) {
       // Position
       this.x = x;
       this.y = y;
       // Score properties
       // Display properties
       this.fillColor = fillColor;
-      this.height = this.score;
     }
 
 
@@ -31,8 +30,8 @@ class ScoreBar{
       noStroke();
       fill(this.fillColor);
       // height is defined in terms of the player's score
-      this.score = bee.score;
-      rect(this.x, this.y, this.width, this.height * 5);
+      //this.score = bee.score;
+      rect(this.x, this.y, this.width, bee.score * 5);
       pop();
     }
 }
