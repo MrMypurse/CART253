@@ -34,6 +34,8 @@ let menuImg;
 let winImg;
 let failImg;
 
+//start game after menu
+let startGame = false;
 // preload()
 //
 //Preload sounds and images
@@ -62,8 +64,8 @@ function setup() {
   bee = new Predator(windowWidth/2, windowHeight/2, 3, 30);
 
   //create 2 natural enemies
-  bear = new NaturalEnemy (random(0,width), random(0, height), 10 , color(0), 30);
-  bugSpray = new AltimateEnemy (random(0,width), random(0, height), 20 , color(105,105,105), 30);
+  bear = new NaturalEnemy (random(0,width), random(0, height), 10 , 30);
+  bugSpray = new AltimateEnemy (random(0,width), random(0, height), 20 , 30);
 
   //create 21 preys
   for (let i = 0; i < 7; i++){
@@ -90,37 +92,47 @@ function setup() {
 function draw() {
   // Clear the background to black
   background(255);
+  if ( startGame === false){
+    image(menuImg, 0, 0, windowWidth, windowHeight);
 
-  //End game when predator is dead
-  if (bee.death() === true){
-    image(failImg, 0, 0, windowWidth, windowHeight);
-    return;
-} else{
-  // Handle input for the bee
-  bee.handleInput();
+  }else{
+    //End game when predator is dead
+    if (bee.death() === true){
+      image(failImg, 0, 0, windowWidth, windowHeight);
+      return;
+    }else{
 
-  // Move the bee
-  bee.display();
-  bee.move();
+    // Handle input for the bee
+    bee.handleInput();
 
-  //Move all enemies
-  bear.display();
-  bear.move();
-  bear.handleAttack(bee);
-  bugSpray.display();
-  bugSpray.move();
-  bugSpray.handleAttack(bee);
+    // Move the bee
+    bee.display();
+    bee.move();
 
-  //Move all preys
-  for (let i = 0; i < prey.length; i++){
-    prey[i].move();
-  // Handle the bee eating any of the prey
-    bee.handleEating(prey[i]);
-    prey[i].display();
+    //Move all enemies
+    bear.display();
+    bear.move();
+    bear.handleAttack(bee);
+    bugSpray.display();
+    bugSpray.move();
+    bugSpray.handleAttack(bee);
+
+    //Move all preys
+    for (let i = 0; i < prey.length; i++){
+      prey[i].move();
+    // Handle the bee eating any of the prey
+      bee.handleEating(prey[i]);
+      prey[i].display();
+    }
+    //display player's score on a side bar
+    // check if player is dead
+    bee.death();
+
   }
 
-  //display player's score on a side bar
-  // check if player is dead
-  bee.death();
+  }
 }
-}
+
+  function mousePressed(){
+    startGame = true;
+  }

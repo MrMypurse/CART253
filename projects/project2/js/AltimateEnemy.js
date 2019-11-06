@@ -10,8 +10,8 @@ class AltimateEnemy extends NaturalEnemy{
   //
   // Sets the initial values for the NaturalEnemy's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, fillColor, radius) {
-    super(x, y, speed, fillColor, radius);
+  constructor(x, y, speed, radius) {
+    super(x, y, speed, radius);
   }
 
 
@@ -28,9 +28,16 @@ class AltimateEnemy extends NaturalEnemy{
    // Decrease predator health by the same amount
     //  predator.health -= this.healthGainPerEat * 20;
    // Check if the prey died and reset it if so
-   //if (predator.health <= 0) {
-        //gameover
-    //  }
     }
 }
+
+  display(){
+    push();
+    noStroke();
+    this.radius = this.health;
+    if (this.radius > 1){
+        image(bugSprayImg, this.x, this.y, this.radius * 2, this.radius * 2);
+    }
+    pop();
+  }
 }

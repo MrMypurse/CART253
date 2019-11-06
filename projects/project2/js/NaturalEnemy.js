@@ -10,7 +10,7 @@ class NaturalEnemy {
   //
   // Sets the initial values for the NaturalEnemy's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, fillColor, radius) {
+  constructor(x, y, speed, radius) {
     // Position
     this.x = x;
     this.y = y;
@@ -27,7 +27,6 @@ class NaturalEnemy {
     this.healthLossPerMove = 0.05;
     this.healthGainPerEat = 0.5;
     // Display properties
-    this.fillColor = fillColor;
     this.radius = this.health;
   }
 
@@ -97,10 +96,9 @@ class NaturalEnemy {
 display() {
   push();
   noStroke();
-  fill(this.fillColor);
   this.radius = this.health;
   if (this.radius > 1){
-      ellipse(this.x, this.y, this.radius * 2);
+      image(bearImg, this.x, this.y, this.radius * 2, this.radius * 2);
   }
   pop();
 }
