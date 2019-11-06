@@ -31,7 +31,7 @@ class ScoreBar{
       noStroke();
       fill(this.fillColor);
       // height is defined in terms of the player's score
-      this.score = predator.score;
+      this.score = bee.score;
       rect(this.x, this.y, this.width, this.height * 5);
       pop();
     }

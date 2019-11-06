@@ -19,7 +19,6 @@ let sunflowerImg;
 
 //Array for Prey and enemy
 let prey = [ ];
-let enemy = [ ];
 
 //The 2 enemy and their images
 let bugSpray;
@@ -30,16 +29,24 @@ let bearImg;
 // keep score of how many flower the player has collected
 let honeyBar;
 
+//menu images and end game images
+let menuImg;
+let winImg;
+let failImg;
 
 // preload()
 //
 //Preload sounds and images
 function preload(){
+  beeImg = loadImage("assets/images/bee.png");
   lavenderImg = loadImage("assets/images/lavender.png");
   poppieImg = loadImage("assets/images/poppie.png");
   sunflowerImg = loadImage("assets/images/sunflower.png");
   bugSprayImg = loadImage("assets/images/bugSpray.png");
   bearImg = loadImage("assets/images/bear.png");
+  menuImg = loadImage("assets/images/bg.jpg");
+  winImg = loadImage("assets/images/win.jpg");
+  failImg = loadImage("assets/images/fail.jpg");
 }
 
 
@@ -52,7 +59,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   //create 1 bee(predator)
-  bee = new Predator(windowWidth/2, windowHeight/2, 3, color(252, 215, 3), 30);
+  bee = new Predator(windowWidth/2, windowHeight/2, 3, 30);
 
   //create 2 natural enemies
   bear = new NaturalEnemy (random(0,width), random(0, height), 10 , color(0), 30);
@@ -85,11 +92,10 @@ function draw() {
   background(255);
 
   //End game when predator is dead
-  //if (predator.death() === true){
-  //  image(backgroundImg, 0, 0, windowWidth, windowHeight);
-  //  return;
-  //  else{}
-
+  if (bee.death() === true){
+    image(failImg, 0, 0, windowWidth, windowHeight);
+    return;
+} else{
   // Handle input for the bee
   bee.handleInput();
 
@@ -114,5 +120,7 @@ function draw() {
   }
 
   //display player's score on a side bar
-
+  // check if player is dead
+  bee.death();
+}
 }
