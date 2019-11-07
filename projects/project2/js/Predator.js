@@ -44,21 +44,17 @@ class Predator {
     // Horizontal movement
     if (keyIsDown(this.leftKey)) {
       this.vx = -this.speed;
-    }
-    else if (keyIsDown(this.rightKey)) {
+    } else if (keyIsDown(this.rightKey)) {
       this.vx = this.speed;
-    }
-    else {
+    } else {
       this.vx = 0;
     }
     // Vertical movement
     if (keyIsDown(this.upKey)) {
       this.vy = -this.speed;
-    }
-    else if (keyIsDown(this.downKey)) {
+    } else if (keyIsDown(this.downKey)) {
       this.vy = this.speed;
-    }
-    else {
+    } else {
       this.vy = 0;
     }
   }
@@ -89,15 +85,13 @@ class Predator {
     // Off the left or right
     if (this.x < 0) {
       this.x += width;
-    }
-    else if (this.x > width) {
+    } else if (this.x > width) {
       this.x -= width;
     }
     // Off the top or bottom
     if (this.y < 0) {
       this.y += height;
-    }
-    else if (this.y > height) {
+    } else if (this.y > height) {
       this.y -= height;
     }
   }
@@ -133,18 +127,17 @@ class Predator {
     push();
     noStroke();
     this.radius = this.health;
-    if (this.radius > 1){
-        image(this.image, this.x, this.y, this.radius * 2, this.radius * 2);
+    if (this.radius > 1) {
+      image(this.image, this.x, this.y, this.radius * 2, this.radius * 2);
     }
     pop();
   }
 
   endGame() {
-    if (this.health <= 0){
+    if (this.health <= 0) {
       state = "GAMEOVER";
       return;
-    }
-    else if (this.score >= 30){
+    } else if (this.score >= 30) {
       state = "GAMEWIN";
       return;
     }

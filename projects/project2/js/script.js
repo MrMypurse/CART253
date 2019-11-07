@@ -60,31 +60,31 @@ function preload() {
 // Sets up a canvas
 // Creates objects for the predator and three prey
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(1050, 700);
 
   //create 1 bee(predator)
-  bee = new Predator(windowWidth / 2, windowHeight / 2, 3, 30, beeImg);
+  bee = new Predator(width / 2, height / 2, 3, 30, beeImg);
 
   //create 2 natural enemies
-  bear = new NaturalEnemy(random(0, width), random(0, height), 10, 30, bearImg);
-  bugSpray = new AltimateEnemy(random(0, width), random(0, height), 20, 30, bugSprayImg);
+  bear = new NaturalEnemy(random(0, 1000), random(0, 700), 10, 30, bearImg);
+  bugSpray = new AltimateEnemy(random(0, 1000), random(0, 700), 20, 30, bugSprayImg);
 
   //create 21 preys
-  for (let i = 0; i < 7; i++) {
-    lavender = new Prey(random(0, width), random(0, height), 8, color(157, 94, 230), 15, lavenderImg);
+  for (let i = 0; i < 10; i++) {
+    lavender = new Prey(random(0, 1000), random(0, 700), 8, color(157, 94, 230), 25, lavenderImg);
     prey.push(lavender);
   }
   for (let i = 0; i < 7; i++) {
-    poppie = new Prey(random(0, width), random(0, height), 8, color(255, 0, 0), 10, poppieImg);
+    poppie = new Prey(random(0, 1000), random(0, 700), 8, color(255, 0, 0), 22, poppieImg);
     prey.push(poppie);
   }
-  for (let i = 0; i < 7; i++) {
-    sunflower = new Prey(random(0, width), random(0, height), 8, color(237, 155, 47), 20, sunflowerImg);
+  for (let i = 0; i < 10; i++) {
+    sunflower = new Prey(random(0, 1000), random(0, 700), 8, color(237, 155, 47), 30, sunflowerImg);
     prey.push(sunflower);
   }
 
   //create the score bar
-  honeyBar = new ScoreBar(width / 2, height / 2, color(252, 215, 3), 30,);
+  honeyBar = new ScoreBar(950, 650, color(252, 215, 3), 30);
 
 }
 
@@ -119,6 +119,9 @@ function mousePressed() {
     state = "GAMEPLAY";
     bee.health = 30;
     bee.score = 0;
+    lavender.reset();
+    poppie.reset();
+    sunflower.reset();
   }
 
 }
@@ -126,20 +129,20 @@ function mousePressed() {
 //displayInstruction()
 //display instruction screen
 function displayInstruction() {
-  image(menuImg, 0, 0, windowWidth, windowHeight);
+  image(menuImg, 0, 0, 1000, 700);
 }
 
 
 //displayGameover()
 //display gameover screen when predator dies
 function displayGameover() {
-  image(failImg, 0, 0, windowWidth, windowHeight);
+  image(failImg, 0, 0, 1000, 700);
 }
 
 //displayGamewin()
 //tell player that they won after reaching certain score
 function displayGamewin() {
-  image(winImg, 0, 0, windowWidth, windowHeight);
+  image(winImg, 0, 0, 1000, 700);
 }
 
 //displayGameplay()
