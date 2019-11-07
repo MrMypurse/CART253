@@ -116,15 +116,21 @@ function mousePressed() {
   if (state === "INSTRUCTION") {
     state = "GAMEPLAY";
   } else if (state === "GAMEOVER" || state === "GAMEWIN") {
-    state = "GAMEPLAY";
-    bee.health = 30;
-    bee.score = 0;
-    lavender.reset();
-    poppie.reset();
-    sunflower.reset();
+    resetGame();
   }
 
 }
+
+function resetGame() {
+  state = "GAMEPLAY";
+  bee.health = 30;
+  bee.score = 0;
+  lavender.reset();
+  poppie.reset();
+  sunflower.reset();
+
+}
+
 
 //displayInstruction()
 //display instruction screen

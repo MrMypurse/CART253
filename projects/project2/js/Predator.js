@@ -30,6 +30,7 @@ class Predator {
     this.downKey = DOWN_ARROW;
     this.leftKey = LEFT_ARROW;
     this.rightKey = RIGHT_ARROW;
+    this.sprintKey = 32;
     //Initial score
     this.score = 0;
 
@@ -56,6 +57,12 @@ class Predator {
       this.vy = this.speed;
     } else {
       this.vy = 0;
+    }
+    //Sprinting movement
+    if (keyIsDown(this.sprintKey)) {
+      this.speed = 5;
+      this.healthLossPerMove = 0.1;
+
     }
   }
 
@@ -137,7 +144,7 @@ class Predator {
     if (this.health <= 0) {
       state = "GAMEOVER";
       return;
-    } else if (this.score >= 30) {
+    } else if (this.score >= 20) {
       state = "GAMEWIN";
       return;
     }

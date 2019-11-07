@@ -90,11 +90,9 @@ class Prey {
   // and radius back to default
   reset() {
     // Random position
-    this.x = random(0, width);
-    this.y = random(0, height);
+    this.x = random(0, 1000);
+    this.y = random(0, 700);
     // Default health
     this.health = this.maxHealth;
-    // Default radius
-    this.radius = this.health;
   }
 }
