@@ -10,7 +10,7 @@ class Predator {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, radius) {
+  constructor(x, y, speed, radius, predatorImage) {
     // Position
     this.x = x;
     this.y = y;
@@ -32,6 +32,8 @@ class Predator {
     this.rightKey = RIGHT_ARROW;
     //Initial score
     this.score = 0;
+
+    this.image = predatorImage;
   }
 
   // handleInput
@@ -118,11 +120,8 @@ class Predator {
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
         this.score = this.score + 1;
-        return;
         prey.reset();
       }
-      console.log(this.health);
-      console.log(this.score);
     }
   }
 
@@ -135,18 +134,19 @@ class Predator {
     noStroke();
     this.radius = this.health;
     if (this.radius > 1){
-        image(beeImg, this.x, this.y, this.radius * 2, this.radius * 2);
+        image(this.image, this.x, this.y, this.radius * 2, this.radius * 2);
     }
     pop();
   }
 
-  death() {
+  endGame() {
     if (this.health <= 0){
-      return true;
+      state = "GAMEOVER";
+      return;
     }
-    else {
-      return false;
+    else if (this.score >= 30){
+      state = "GAMEWIN";
+      return;
     }
-    console.log(this.death);
   }
 }

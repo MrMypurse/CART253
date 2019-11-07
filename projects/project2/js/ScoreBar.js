@@ -16,6 +16,8 @@ class ScoreBar{
       // Score properties
       // Display properties
       this.fillColor = fillColor;
+      this.height = 0;
+      this.width = width;
     }
 
 
@@ -31,7 +33,12 @@ class ScoreBar{
       fill(this.fillColor);
       // height is defined in terms of the player's score
       //this.score = bee.score;
-      rect(this.x, this.y, this.width, bee.score * 5);
+      rect(this.x, this.y, this.width, this.height);
       pop();
+      console.log(this.height);
+    }
+
+    updateScore(score){
+      this.height = score;
     }
 }

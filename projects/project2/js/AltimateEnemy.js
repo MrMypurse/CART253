@@ -10,8 +10,8 @@ class AltimateEnemy extends NaturalEnemy{
   //
   // Sets the initial values for the NaturalEnemy's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, radius) {
-    super(x, y, speed, radius);
+  constructor(x, y, speed, radius, enemyImg) {
+    super(x, y, speed, radius, enemyImg);
   }
 
 
@@ -36,7 +36,7 @@ class AltimateEnemy extends NaturalEnemy{
     noStroke();
     this.radius = this.health;
     if (this.radius > 1){
-        image(bugSprayImg, this.x, this.y, this.radius * 2, this.radius * 2);
+        image(this.image, this.x, this.y, this.radius * 2, this.radius * 2);
     }
     pop();
   }
