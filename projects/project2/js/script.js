@@ -84,7 +84,7 @@ function setup() {
   }
 
   //create the score bar
-  honeyBar = new ScoreBar(950, 650, color(252, 215, 3), 30);
+  honeyBar = new ScoreBar(950, 600, color(252, 215, 3), 30);
 
 }
 

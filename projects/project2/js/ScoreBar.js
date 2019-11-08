@@ -31,14 +31,12 @@ class ScoreBar {
     push();
     noStroke();
     fill(this.fillColor);
-    // height is defined in terms of the player's score
-    //this.score = bee.score;
     rect(this.x, this.y, this.width, -this.height);
     pop();
-    console.log(this.height);
   }
 
+    // height is defined in terms of the player's score
   updateScore(score) {
-    this.height = score * 10;
+    this.height = score * 22;
   }
 }
