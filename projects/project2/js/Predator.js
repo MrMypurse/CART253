@@ -30,7 +30,7 @@ class Predator {
     this.downKey = DOWN_ARROW;
     this.leftKey = LEFT_ARROW;
     this.rightKey = RIGHT_ARROW;
-    this.sprintKey = 32;
+    this.sprintKey = 16;
     //Initial score
     this.score = 0;
 
@@ -60,7 +60,7 @@ class Predator {
     }
     //Sprinting movement
     if (keyIsDown(this.sprintKey)) {
-      this.speed = 5;
+      this.speed = 4;
       this.healthLossPerMove = 0.1;
 
     }

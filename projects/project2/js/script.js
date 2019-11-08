@@ -1,7 +1,8 @@
 // HoneyBee Simulator
-// by Pippin Barr
-//
-// Creates a predator and three prey (of different sizes and speeds)
+// Art by Janet Sun
+// Program by Janet Sun
+// Sound by freesound.org
+// Creates a bee and three types of flower
 // The predator chases the prey using the arrow keys and consumes them.
 // The predator loses health over time, so must keep eating to survive.
 
@@ -72,28 +73,28 @@ function setup() {
   createCanvas(1050, 700);
 
   //create 1 bee(predator)
-  bee = new Predator(width / 2, height / 2, 3, 30, beeImg);
+  bee = new Predator(width / 2, height / 2, 2, 30, beeImg);
 
   //create 2 natural enemies
-  bear = new NaturalEnemy(random(0, 1000), random(0, 700), 10, 30, bearImg);
-  bugSpray = new AltimateEnemy(random(0, 1000), random(0, 700), 20, 30, bugSprayImg);
+  bear = new NaturalEnemy(random(0, 1000), random(0, 700), 10, 45, bearImg);
+  bugSpray = new AltimateEnemy(random(0, 1000), random(0, 700), 20, 40, bugSprayImg);
 
   //create 21 preys
-  for (let i = 0; i < 10; i++) {
-    lavender = new Prey(random(0, 1000), random(0, 700), 8, color(157, 94, 230), 30, lavenderImg);
+  for (let i = 0; i < 7; i++) {
+    lavender = new Prey(random(0, 1000), random(0, 700), 8, 35, lavenderImg);
     prey.push(lavender);
   }
   for (let i = 0; i < 7; i++) {
-    poppie = new Prey(random(0, 1000), random(0, 700), 8, color(255, 0, 0), 30, poppieImg);
+    poppie = new Prey(random(0, 1000), random(0, 700), 7, 30, poppieImg);
     prey.push(poppie);
   }
-  for (let i = 0; i < 10; i++) {
-    sunflower = new Prey(random(0, 1000), random(0, 700), 8, color(237, 155, 47), 30, sunflowerImg);
+  for (let i = 0; i < 7; i++) {
+    sunflower = new Prey(random(0, 1000), random(0, 700), 5, 38, sunflowerImg);
     prey.push(sunflower);
   }
 
   //create the score bar
-  honeyBar = new ScoreBar(950, 600, color(252, 215, 3), 30);
+  honeyBar = new ScoreBar(970, 600, color(252, 215, 3), 30);
 
 }
 
