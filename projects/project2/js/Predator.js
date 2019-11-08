@@ -122,6 +122,7 @@ class Predator {
       if (prey.health < 0) {
         this.score = this.score + 1;
         prey.reset();
+        bloop.play();
       }
     }
   }

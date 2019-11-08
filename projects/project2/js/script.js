@@ -34,6 +34,11 @@ let menuImg;
 let winImg;
 let failImg;
 
+//menu sound and gameplay sounds
+let gameMusic;
+let buzz;
+let bloop;
+
 //start game after menu
 let state = "INSTRUCTION";
 
@@ -51,6 +56,9 @@ function preload() {
   menuImg = loadImage("assets/images/bg.jpg");
   winImg = loadImage("assets/images/win.jpg");
   failImg = loadImage("assets/images/fail.jpg");
+  gameMusic = loadSound("assets/sounds/bgmusic.wav");
+  buzz = loadSound("assets/sounds/buzz.wav");
+  bloop = loadSound("assets/sounds/bloop.wav");
 }
 
 
@@ -60,6 +68,7 @@ function preload() {
 // Sets up a canvas
 // Creates objects for the predator and three prey
 function setup() {
+  gameMusic.loop();
   createCanvas(1050, 700);
 
   //create 1 bee(predator)
@@ -71,11 +80,11 @@ function setup() {
 
   //create 21 preys
   for (let i = 0; i < 10; i++) {
-    lavender = new Prey(random(0, 1000), random(0, 700), 8, color(157, 94, 230), 25, lavenderImg);
+    lavender = new Prey(random(0, 1000), random(0, 700), 8, color(157, 94, 230), 30, lavenderImg);
     prey.push(lavender);
   }
   for (let i = 0; i < 7; i++) {
-    poppie = new Prey(random(0, 1000), random(0, 700), 8, color(255, 0, 0), 22, poppieImg);
+    poppie = new Prey(random(0, 1000), random(0, 700), 8, color(255, 0, 0), 30, poppieImg);
     prey.push(poppie);
   }
   for (let i = 0; i < 10; i++) {
@@ -113,6 +122,7 @@ function draw() {
 //mousePressed()
 // start game when mouse is pressed
 function mousePressed() {
+  buzz.play();
   if (state === "INSTRUCTION") {
     state = "GAMEPLAY";
   } else if (state === "GAMEOVER" || state === "GAMEWIN") {
@@ -136,6 +146,7 @@ function resetGame() {
 //display instruction screen
 function displayInstruction() {
   image(menuImg, 0, 0, 1000, 700);
+
 }
 
 
@@ -175,6 +186,10 @@ function displayGameplay() {
     // Handle the bee eating any of the prey
     bee.handleEating(prey[i]);
     prey[i].display();
+  //  lavender.reset();
+  //  poppie.reset();
+  //  sunflower.reset();
+
   }
 
   //display player's score on a side bar
