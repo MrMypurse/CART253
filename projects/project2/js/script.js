@@ -135,9 +135,9 @@ function resetGame() {
   state = "GAMEPLAY";
   bee.health = 30;
   bee.score = 0;
-  lavender.reset();
-  poppie.reset();
-  sunflower.reset();
+  for (let i = 0; i < prey.length; i++) {
+    prey[i]. reset();
+  }
 
 }
 
@@ -186,9 +186,6 @@ function displayGameplay() {
     // Handle the bee eating any of the prey
     bee.handleEating(prey[i]);
     prey[i].display();
-  //  lavender.reset();
-  //  poppie.reset();
-  //  sunflower.reset();
 
   }
 
