@@ -18,7 +18,7 @@ let poppieImg;
 let sunflowerImg;
 
 //Array for Prey and enemy
-let prey = [ ];
+let prey = [];
 
 //The 2 enemy and their images
 let bugSpray;
@@ -35,11 +35,13 @@ let winImg;
 let failImg;
 
 //start game after menu
-let startGame = false;
+let state = "INSTRUCTION";
+
+
 // preload()
 //
 //Preload sounds and images
-function preload(){
+function preload() {
   beeImg = loadImage("assets/images/bee.png");
   lavenderImg = loadImage("assets/images/lavender.png");
   poppieImg = loadImage("assets/images/poppie.png");
@@ -58,31 +60,31 @@ function preload(){
 // Sets up a canvas
 // Creates objects for the predator and three prey
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(1050, 700);
 
   //create 1 bee(predator)
-  bee = new Predator(windowWidth/2, windowHeight/2, 3, 30);
+  bee = new Predator(width / 2, height / 2, 3, 30, beeImg);
 
   //create 2 natural enemies
-  bear = new NaturalEnemy (random(0,width), random(0, height), 10 , 30);
-  bugSpray = new AltimateEnemy (random(0,width), random(0, height), 20 , 30);
+  bear = new NaturalEnemy(random(0, 1000), random(0, 700), 10, 30, bearImg);
+  bugSpray = new AltimateEnemy(random(0, 1000), random(0, 700), 20, 30, bugSprayImg);
 
   //create 21 preys
-  for (let i = 0; i < 7; i++){
-      lavender = new Prey(random(0,width), random(0, height), 8, color(157, 94, 230), 15);
-      prey.push(lavender);
+  for (let i = 0; i < 10; i++) {
+    lavender = new Prey(random(0, 1000), random(0, 700), 8, color(157, 94, 230), 25, lavenderImg);
+    prey.push(lavender);
   }
-  for (let i = 0; i < 7; i++){
-      poppie = new Prey(random(0,width), random(0, height), 8, color(255, 0, 0), 10);
-      prey.push(poppie);
+  for (let i = 0; i < 7; i++) {
+    poppie = new Prey(random(0, 1000), random(0, 700), 8, color(255, 0, 0), 22, poppieImg);
+    prey.push(poppie);
   }
-  for (let i = 0; i < 7; i++){
-      sunflower = new Prey(random(0,width), random(0, height), 8, color(237, 155, 47), 20);
-      prey.push(sunflower);
+  for (let i = 0; i < 10; i++) {
+    sunflower = new Prey(random(0, 1000), random(0, 700), 8, color(237, 155, 47), 30, sunflowerImg);
+    prey.push(sunflower);
   }
 
   //create the score bar
-  honeyBar = new ScoreBar(width/2, height/2, color(252, 215, 3), 30);
+  honeyBar = new ScoreBar(950, 650, color(252, 215, 3), 30);
 
 }
 
@@ -92,51 +94,94 @@ function setup() {
 function draw() {
   // Clear the background to black
   background(255);
-  if ( startGame === false){
-    image(menuImg, 0, 0, windowWidth, windowHeight);
+  if (state === "INSTRUCTION") {
+    displayInstruction();
 
-  }else{
-    //End game when predator is dead
-    if (bee.death() === true){
-      image(failImg, 0, 0, windowWidth, windowHeight);
-      return;
-    }else{
+  } else if (state === "GAMEPLAY") {
+    displayGameplay();
 
-    // Handle input for the bee
-    bee.handleInput();
+  } else if (state === "GAMEOVER") {
+    displayGameover();
+    return;
 
-    // Move the bee
-    bee.display();
-    bee.move();
-
-    //Move all enemies
-    bear.display();
-    bear.move();
-    bear.handleAttack(bee);
-    bugSpray.display();
-    bugSpray.move();
-    bugSpray.handleAttack(bee);
-
-    //Move all preys
-    for (let i = 0; i < prey.length; i++){
-      prey[i].move();
-    // Handle the bee eating any of the prey
-      bee.handleEating(prey[i]);
-      prey[i].display();
-    }
-
-    //display player's score on a side bar
-    // check if player is dead
-    bee.death();
-
-    // display score (honey bar)
-    honeyBar.display();
-  }
-
+  } else if (state === "GAMEWIN") {
+    displayGamewin();
+    return;
   }
 }
 
+//mousePressed()
 // start game when mouse is pressed
-  function mousePressed(){
-    startGame = true;
+function mousePressed() {
+  if (state === "INSTRUCTION") {
+    state = "GAMEPLAY";
+  } else if (state === "GAMEOVER" || state === "GAMEWIN") {
+    resetGame();
   }
+
+}
+
+function resetGame() {
+  state = "GAMEPLAY";
+  bee.health = 30;
+  bee.score = 0;
+  lavender.reset();
+  poppie.reset();
+  sunflower.reset();
+
+}
+
+
+//displayInstruction()
+//display instruction screen
+function displayInstruction() {
+  image(menuImg, 0, 0, 1000, 700);
+}
+
+
+//displayGameover()
+//display gameover screen when predator dies
+function displayGameover() {
+  image(failImg, 0, 0, 1000, 700);
+}
+
+//displayGamewin()
+//tell player that they won after reaching certain score
+function displayGamewin() {
+  image(winImg, 0, 0, 1000, 700);
+}
+
+//displayGameplay()
+//display gameplay: predator, prey , enemy
+function displayGameplay() {
+  // Handle input for the bee
+  bee.handleInput();
+
+  // Move the bee
+  bee.display();
+  bee.move();
+
+  //Move all enemies
+  bear.display();
+  bear.move();
+  bear.handleAttack(bee);
+  bugSpray.display();
+  bugSpray.move();
+  bugSpray.handleAttack(bee);
+
+  //Move all preys
+  for (let i = 0; i < prey.length; i++) {
+    prey[i].move();
+    // Handle the bee eating any of the prey
+    bee.handleEating(prey[i]);
+    prey[i].display();
+  }
+
+  //display player's score on a side bar
+  // check if player is dead
+  bee.endGame();
+
+  // display score (honey bar)
+  honeyBar.updateScore(bee.score);
+  honeyBar.display();
+}

@@ -10,7 +10,7 @@ class Predator {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, radius) {
+  constructor(x, y, speed, radius, predatorImage) {
     // Position
     this.x = x;
     this.y = y;
@@ -30,8 +30,11 @@ class Predator {
     this.downKey = DOWN_ARROW;
     this.leftKey = LEFT_ARROW;
     this.rightKey = RIGHT_ARROW;
+    this.sprintKey = 32;
     //Initial score
     this.score = 0;
+
+    this.image = predatorImage;
   }
 
   // handleInput
@@ -42,22 +45,24 @@ class Predator {
     // Horizontal movement
     if (keyIsDown(this.leftKey)) {
       this.vx = -this.speed;
-    }
-    else if (keyIsDown(this.rightKey)) {
+    } else if (keyIsDown(this.rightKey)) {
       this.vx = this.speed;
-    }
-    else {
+    } else {
       this.vx = 0;
     }
     // Vertical movement
     if (keyIsDown(this.upKey)) {
       this.vy = -this.speed;
-    }
-    else if (keyIsDown(this.downKey)) {
+    } else if (keyIsDown(this.downKey)) {
       this.vy = this.speed;
-    }
-    else {
+    } else {
       this.vy = 0;
+    }
+    //Sprinting movement
+    if (keyIsDown(this.sprintKey)) {
+      this.speed = 5;
+      this.healthLossPerMove = 0.1;
+
     }
   }
 
@@ -87,15 +92,13 @@ class Predator {
     // Off the left or right
     if (this.x < 0) {
       this.x += width;
-    }
-    else if (this.x > width) {
+    } else if (this.x > width) {
       this.x -= width;
     }
     // Off the top or bottom
     if (this.y < 0) {
       this.y += height;
-    }
-    else if (this.y > height) {
+    } else if (this.y > height) {
       this.y -= height;
     }
   }
@@ -118,11 +121,8 @@ class Predator {
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
         this.score = this.score + 1;
-        return;
         prey.reset();
       }
-      console.log(this.health);
-      console.log(this.score);
     }
   }
 
@@ -134,19 +134,19 @@ class Predator {
     push();
     noStroke();
     this.radius = this.health;
-    if (this.radius > 1){
-        image(beeImg, this.x, this.y, this.radius * 2, this.radius * 2);
+    if (this.radius > 1) {
+      image(this.image, this.x, this.y, this.radius * 2, this.radius * 2);
     }
     pop();
   }
 
-  death() {
-    if (this.health <= 0){
-      return true;
+  endGame() {
+    if (this.health <= 0) {
+      state = "GAMEOVER";
+      return;
+    } else if (this.score >= 20) {
+      state = "GAMEWIN";
+      return;
     }
-    else {
-      return false;
-    }
-    console.log(this.death);
   }
 }
