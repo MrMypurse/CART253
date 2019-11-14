@@ -6,49 +6,125 @@
 // The predator loses health over time, so must keep eating to survive.
 
 // Our predator
-let tiger;
+let player;
 
 // The three prey
 let antelope;
 let zebra;
 let bee;
 
+// Array for prey
+let prey = [];
+
+//set up game state
+let state = "INSTRUCTION";
 // setup()
 //
 // Sets up a canvas
 // Creates objects for the predator and three prey
 function setup() {
   createCanvas(1050, 700);
-  tiger = new Predator(width/2, height - 100, 5, color(200, 200, 0), 40);
-  antelope = new Prey(random(0, width), 10, 3, color(255, 100, 10), 50);
-  zebra = new Prey(random(0, width), 10, 3, color(255, 255, 255), 60);
-  bee = new Prey(random(0, width), 10, 3, color(255, 255, 0), 10);
+  player = new Predator(width/2, height - 100, 5, color(200, 200, 0), 40);
+  for (let i = 0; i < 5; i++) {
+  antelope = new Prey(random(0, width), random(0, 30), random(3, 5), color(255, 100, 10), 30);
+  prey.push(antelope);
+  }
+  for (let i = 0; i < 5; i++) {
+  zebra = new Prey(random(0, width), random(0, 30), random(3, 5), color(255, 255, 255), 30);
+  prey.push(zebra);
+  }
+  for (let i = 0; i < 5; i++) {
+  bee = new Prey(random(0, width), random(0, 30), random(3, 5), color(255, 255, 0), 20);
+  prey.push(bee);
+  }
 }
+
+
 
 // draw()
 //
 // Handles input, movement, eating, and displaying for the system's objects
+
 function draw() {
   // Clear the background to black
   background(0);
+  if (state === "INSTRUCTION") {
+    displayInstruction();
 
+  } else if (state === "GAMEPLAY") {
+    displayGameplay();
+
+  } else if (state === "GAMEOVER") {
+    displayGameover();
+    return;
+
+  } else if (state === "GAMEWIN") {
+    displayGamewin();
+    return;
+  }
+}
+
+//mousePressed()
+// start game when mouse is pressed
+function mousePressed() {
+  if (state === "INSTRUCTION") {
+    state = "GAMEPLAY";
+  } else if (state === "GAMEOVER" || state === "GAMEWIN") {
+    resetGame();
+  }
+}
+
+function resetGame() {
+    state = "GAMEPLAY";
+  }
+
+
+//displayInstruction()
+//display instruction screen
+function displayInstruction() {
+    background(255, 0 , 0);
+  }
+
+
+  //displayGameover()
+  //display gameover screen when predator dies
+  function displayGameover() {
+    image(failImg, 0, 0, 1000, 700);
+  }
+
+//displayGamewin()
+//tell player that they won after reaching certain score
+function displayGamewin() {
+    background(0, 255, 0);
+  }
+
+
+//displayGameover()
+//display gameover screen when predator dies
+function displayGameover() {
+    background(0, 0 , 255);
+}
+
+//displayGameplay()
+//display gameplay: predator, prey , enemy
+function displayGameplay() {
   // Handle input for the tiger
-  tiger.handleInput();
+  player.handleInput();
 
   // Move all the "animals"
-  tiger.move();
-  antelope.move();
-  zebra.move();
-  bee.move();
+  player.move();
+  for (let i = 0; i < prey.length; i++) {
+    prey[i].move();
+    // Handle the bee eating any of the prey
+    player.handleEating(prey[i]);
+    prey[i].display();
+  }
 
   // Handle the tiger eating any of the prey
-  tiger.handleEating(antelope);
-  tiger.handleEating(zebra);
-  tiger.handleEating(bee);
+  player.handleEating(antelope);
+  player.handleEating(zebra);
+  player.handleEating(bee);
 
   // Display all the "animals"
-  tiger.display();
-  antelope.display();
-  zebra.display();
-  bee.display();
+  player.display();
 }
