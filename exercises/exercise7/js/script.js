@@ -8,10 +8,12 @@
 // Our player
 let player;
 
-// The three supply
-let antelope;
-let zebra;
-let bee;
+// The four supply
+let water;
+let food;
+let battery;
+let firstAid;
+let toxicWaste;
 
 // Array for supply
 let supply = [];
@@ -24,18 +26,26 @@ let state = "INSTRUCTION";
 // Creates objects for the player and three supply
 function setup() {
   createCanvas(1050, 700);
-  player = new Player(width / 2, height - 100, 5, color(200, 200, 0), 40);
+  player = new Player(width / 2, height - 100, 5, color(255, 255, 255), 40);
   for (let i = 0; i < 5; i++) {
-    antelope = new Supply(random(0, width), random(0, 30), random(3, 5), color(255, 100, 10), 30);
-    supply.push(antelope);
+    water = new Supply(random(0, width), random(0, 30), random(2, 5), color(166, 236, 255), 30);
+    supply.push(water);
   }
   for (let i = 0; i < 5; i++) {
-    zebra = new Supply(random(0, width), random(0, 30), random(3, 5), color(255, 255, 255), 30);
-    supply.push(zebra);
+    food = new Supply(random(0, width), random(0, 30), random(2, 5), color(242, 177, 65), 30);
+    supply.push(food);
   }
-  for (let i = 0; i < 5; i++) {
-    bee = new Supply(random(0, width), random(0, 30), random(3, 5), color(255, 255, 0), 20);
-    supply.push(bee);
+  for (let i = 0; i < 2; i++) {
+    battery = new Supply(random(0, width), random(0, 30), random(2, 5), color(66, 48, 255), 20);
+    supply.push(battery);
+  }
+  for (let i = 0; i < 2; i++) {
+    firstAid = new Supply(random(0, width), random(0, 30), random(2, 5), color(48, 255, 55), 20);
+    supply.push(firstAid);
+  }
+  for (let i = 0; i < 2; i++) {
+    toxicWaste = new Waste(random(0, width), random(0, 30), random(2, 5), color(196, 48, 255), 20);
+    supply.push(toxicWaste);
   }
 }
 
@@ -108,10 +118,10 @@ function displayGameover() {
 //displayGameplay()
 //display gameplay: player, supply , enemy
 function displayGameplay() {
-  // Handle input for the tiger
+  // Handle input for the player
   player.handleInput();
 
-  // Move all the "animals"
+  // Move all the supplies
   player.move();
   for (let i = 0; i < supply.length; i++) {
     supply[i].move();
@@ -120,10 +130,14 @@ function displayGameplay() {
     supply[i].display();
   }
 
-  // Handle the tiger eating any of the supply
-  player.handleEating(antelope);
-  player.handleEating(zebra);
-  player.handleEating(bee);
+  // Handle the player collecting any of the supply
+  player.handleEating(water);
+  player.handleEating(food);
+  player.handleEating(battery);
+  player.handleEating(firstAid);
+  // Nuclear waste and monster attack the Player
+  toxicWaste.handleAttack(player);
+
 
   // Display all the "animals"
   player.display();

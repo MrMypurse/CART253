@@ -22,7 +22,7 @@ class Player {
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
     this.healthLossPerMove = 0.01;
-    this.healthGainPerEat = 1;
+    this.healthGainPerEat = 5;
     // Display properties
     this.fillColor = fillColor;
     this.radius = this.health; // Radius is defined in terms of health
@@ -97,9 +97,10 @@ class Player {
       // Decrease supply health by the same amount
       supply.health -= this.healthGainPerEat;
       // Check if the supply died and reset it if so
-      if (supply.health < 0) {
+      if (supply.health < 2) {
         supply.reset();
       }
+      console.log(this.health);
     }
   }
 
@@ -112,7 +113,9 @@ class Player {
     noStroke();
     fill(this.fillColor);
     this.radius = this.health;
+    if (this.radius > 2){
     ellipse(this.x, this.y, this.radius * 2);
+    }
     pop();
   }
 }
