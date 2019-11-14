@@ -4,18 +4,12 @@
 // controlled by the arrow keys. It can move around
 // the screen and consume Prey objects to maintain its health.
 
-/////////////////////
-// ~10 ERRORS IN HERE
-/////////////////////
-
 class Predator {
 
   // constructor
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  //////////////// FIXED
-  //////////////// FIXED
   constructor(x, y, speed, fillColor, radius) {
     // Position
     this.x = x;
@@ -31,10 +25,8 @@ class Predator {
     this.healthGainPerEat = 1;
     // Display properties
     this.fillColor = fillColor;
-    //////////////// FIXED
     this.radius = this.health; // Radius is defined in terms of health
     // Input properties
-    //////////////// FIXED
     this.upKey = UP_ARROW;
     this.downKey = DOWN_ARROW;
     this.leftKey = LEFT_ARROW;
@@ -60,7 +52,6 @@ class Predator {
     if (keyIsDown(this.upKey)) {
       this.vy = -this.speed;
     }
-    //////////////// FIXED
     else if (keyIsDown(this.downKey)) {
       this.vy = this.speed;
     }
@@ -76,7 +67,6 @@ class Predator {
   // Handles wrapping
   move() {
     // Update position
-    //////////////// FIXED
     this.x += this.vx;
     this.y += this.vy;
     // Update health
@@ -114,7 +104,6 @@ class Predator {
   // the predator's. If the prey dies, it gets reset.
   handleEating(prey) {
     // Calculate distance from this predator to the prey
-    //////////////// FIXED
     let d = dist(this.x, this.y, prey.x, prey.y);
     // Check if the distance is less than their two radii (an overlap)
     if (d < this.radius + prey.radius) {
@@ -125,7 +114,6 @@ class Predator {
       prey.health -= this.healthGainPerEat;
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
-        //////////////// FIXED
         prey.reset();
       }
     }
@@ -136,13 +124,11 @@ class Predator {
   // Draw the predator as an ellipse on the canvas
   // with a radius the same size as its current health.
   display() {
-    //////////////// FIXED
     push();
     noStroke();
     fill(this.fillColor);
     this.radius = this.health;
     ellipse(this.x, this.y, this.radius * 2);
-    //////////////// FIXED
     pop();
   }
 }
