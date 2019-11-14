@@ -1,41 +1,41 @@
-// Predator-Prey Simulation
+// player-supply Simulation
 // by Pippin Barr
 //
-// Creates a predator and three prey (of different sizes and speeds)
-// The predator chases the prey using the arrow keys and consumes them.
-// The predator loses health over time, so must keep eating to survive.
+// Creates a player and three supply (of different sizes and speeds)
+// The player chases the supply using the arrow keys and consumes them.
+// The player loses health over time, so must keep eating to survive.
 
-// Our predator
+// Our player
 let player;
 
-// The three prey
+// The three supply
 let antelope;
 let zebra;
 let bee;
 
-// Array for prey
-let prey = [];
+// Array for supply
+let supply = [];
 
 //set up game state
 let state = "INSTRUCTION";
 // setup()
 //
 // Sets up a canvas
-// Creates objects for the predator and three prey
+// Creates objects for the player and three supply
 function setup() {
   createCanvas(1050, 700);
-  player = new Predator(width/2, height - 100, 5, color(200, 200, 0), 40);
+  player = new Player(width / 2, height - 100, 5, color(200, 200, 0), 40);
   for (let i = 0; i < 5; i++) {
-  antelope = new Prey(random(0, width), random(0, 30), random(3, 5), color(255, 100, 10), 30);
-  prey.push(antelope);
+    antelope = new Supply(random(0, width), random(0, 30), random(3, 5), color(255, 100, 10), 30);
+    supply.push(antelope);
   }
   for (let i = 0; i < 5; i++) {
-  zebra = new Prey(random(0, width), random(0, 30), random(3, 5), color(255, 255, 255), 30);
-  prey.push(zebra);
+    zebra = new Supply(random(0, width), random(0, 30), random(3, 5), color(255, 255, 255), 30);
+    supply.push(zebra);
   }
   for (let i = 0; i < 5; i++) {
-  bee = new Prey(random(0, width), random(0, 30), random(3, 5), color(255, 255, 0), 20);
-  prey.push(bee);
+    bee = new Supply(random(0, width), random(0, 30), random(3, 5), color(255, 255, 0), 20);
+    supply.push(bee);
   }
 }
 
@@ -75,52 +75,52 @@ function mousePressed() {
 }
 
 function resetGame() {
-    state = "GAMEPLAY";
-  }
+  state = "GAMEPLAY";
+}
 
 
 //displayInstruction()
 //display instruction screen
 function displayInstruction() {
-    background(255, 0 , 0);
-  }
+  background(255, 0, 0);
+}
 
 
-  //displayGameover()
-  //display gameover screen when predator dies
-  function displayGameover() {
-    image(failImg, 0, 0, 1000, 700);
-  }
+//displayGameover()
+//display gameover screen when player dies
+function displayGameover() {
+  image(failImg, 0, 0, 1000, 700);
+}
 
 //displayGamewin()
 //tell player that they won after reaching certain score
 function displayGamewin() {
-    background(0, 255, 0);
-  }
+  background(0, 255, 0);
+}
 
 
 //displayGameover()
-//display gameover screen when predator dies
+//display gameover screen when player dies
 function displayGameover() {
-    background(0, 0 , 255);
+  background(0, 0, 255);
 }
 
 //displayGameplay()
-//display gameplay: predator, prey , enemy
+//display gameplay: player, supply , enemy
 function displayGameplay() {
   // Handle input for the tiger
   player.handleInput();
 
   // Move all the "animals"
   player.move();
-  for (let i = 0; i < prey.length; i++) {
-    prey[i].move();
-    // Handle the bee eating any of the prey
-    player.handleEating(prey[i]);
-    prey[i].display();
+  for (let i = 0; i < supply.length; i++) {
+    supply[i].move();
+    // Handle the bee eating any of the supply
+    player.handleEating(supply[i]);
+    supply[i].display();
   }
 
-  // Handle the tiger eating any of the prey
+  // Handle the tiger eating any of the supply
   player.handleEating(antelope);
   player.handleEating(zebra);
   player.handleEating(bee);

@@ -1,14 +1,14 @@
-// Prey
+// supply
 //
-// A class that represents a simple prey that moves
+// A class that represents a simple supply that moves
 // on screen based on a noise() function. It can move around
-// the screen and be consumed by Predator objects.
+// the screen and be consumed by player objects.
 
-class Prey {
+class Supply {
 
   // constructor
   //
-  // Sets the initial values for the Predator's properties
+  // Sets the initial values for the player's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, fillColor, radius) {
     // Position
@@ -31,7 +31,7 @@ class Prey {
 
   // move
   //
-  // Sets velocity based on the noise() function and the Prey's speed
+  // Sets velocity based on the noise() function and the supply's speed
   // Moves based on the resulting velocity and handles wrapping
   move() {
     // Set velocity via noise()
@@ -50,28 +50,26 @@ class Prey {
 
   // handleWrapping
   //
-  // Checks if the prey has gone off the canvas and
+  // Checks if the supply has gone off the canvas and
   // wraps it to the other side if so
   handleWrapping() {
     // Off the left or right
     if (this.x < 0) {
       this.x += width;
-    }
-    else if (this.x > width) {
+    } else if (this.x > width) {
       this.x -= width;
     }
     // Off the top or bottom
     if (this.y < 0) {
       this.y += height;
-    }
-    else if (this.y > height) {
+    } else if (this.y > height) {
       this.y -= height;
     }
   }
 
   // display
   //
-  // Draw the prey as an ellipse on the canvas
+  // Draw the supply as an ellipse on the canvas
   // with a radius the same size as its current health.
   display() {
     push();
