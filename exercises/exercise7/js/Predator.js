@@ -21,16 +21,14 @@ class Predator {
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
-    this.healthLossPerMove = 0.1;
+    this.healthLossPerMove = 0.01;
     this.healthGainPerEat = 1;
     // Display properties
     this.fillColor = fillColor;
     this.radius = this.health; // Radius is defined in terms of health
     // Input properties
-    this.upKey = UP_ARROW;
-    this.downKey = DOWN_ARROW;
-    this.leftKey = LEFT_ARROW;
-    this.rightKey = RIGHT_ARROW;
+    this.leftKey = 65;
+    this.rightKey = 68;
   }
 
   // handleInput
@@ -47,16 +45,6 @@ class Predator {
     }
     else {
       this.vx = 0;
-    }
-    // Vertical movement
-    if (keyIsDown(this.upKey)) {
-      this.vy = -this.speed;
-    }
-    else if (keyIsDown(this.downKey)) {
-      this.vy = this.speed;
-    }
-    else {
-      this.vy = 0;
     }
   }
 

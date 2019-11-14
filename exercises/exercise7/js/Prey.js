@@ -36,7 +36,8 @@ class Prey {
   move() {
     // Set velocity via noise()
     this.vx = map(noise(this.tx), 0, 1, -this.speed, this.speed);
-    this.vy = map(noise(this.ty), 0, 1, -this.speed, this.speed);
+    //this.vy = map(noise(this.ty), 0, 1, -this.speed, this.speed);
+    this.vy = this.speed;
     // Update position
     this.x += this.vx;
     this.y += this.vy;
