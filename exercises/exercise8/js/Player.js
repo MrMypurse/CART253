@@ -100,9 +100,9 @@ class Player {
       if (supply.health < 2) {
         supply.reset();
       }
-      console.log(this.health);
     }
   }
+
 
   // display
   //
@@ -113,9 +113,22 @@ class Player {
     noStroke();
     fill(this.fillColor);
     this.radius = this.health;
-    if (this.radius > 2){
-    ellipse(this.x, this.y, this.radius * 2);
+    if (this.radius > 2) {
+      ellipse(this.x, this.y, this.radius * 2);
     }
     pop();
+  }
+
+  //endGame
+  //
+  //End the main game when player'health is below 0
+  endGame() {
+    if (this.health <= 0) {
+      state = "GAMEOVER";
+      return;
+    } else if (this.score >= 20) {
+      state = "GAMEWIN";
+      return;
+    }
   }
 }

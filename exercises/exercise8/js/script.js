@@ -96,12 +96,6 @@ function displayInstruction() {
 }
 
 
-//displayGameover()
-//display gameover screen when player dies
-function displayGameover() {
-  image(failImg, 0, 0, 1000, 700);
-}
-
 //displayGamewin()
 //tell player that they won after reaching certain score
 function displayGamewin() {
@@ -130,15 +124,18 @@ function displayGameplay() {
     supply[i].display();
   }
 
+
   // Handle the player collecting any of the supply
   player.handleEating(water);
   player.handleEating(food);
   player.handleEating(battery);
   player.handleEating(firstAid);
-  // Nuclear waste and monster attack the Player
-  toxicWaste.handleAttack(player);
+  //Player's health reduces when eating toxic wastes
 
+  toxicWaste.handleAttacking(player);
 
-  // Display all the "animals"
+  //Check if the player is dead and to end game
+  player.endGame();
+  // Display the player
   player.display();
 }

@@ -14,17 +14,25 @@ class Waste extends Supply {
     super(x, y, speed, fillColor, radius);
   }
 
-  handleAttack(player){
-    // Calculate distance from this Enemy to the predator
+  // handleAttacking
+  //
+  // Takes a waste object as an argument and checks if the player
+  // overlaps it. If so, reduces the waste's health and also reduces
+  // the player's. If the waste dies, it gets reset.
+  handleAttacking(player) {
+    // Calculate distance from this player to the waste
     let d2 = dist(this.x, this.y, player.x, player.y);
     // Check if the distance is less than their two radii (an overlap)
     if (d2 < this.radius + player.radius) {
-    // Increase predator health and constrain it to its possible range
-    this.health += this.healthGainPerEat;
-    this.health = constrain(this.health, 0, this.maxHealth);
-    // Decrease predator health by the same amount
-    player.health -= this.healthGainPerEat;
-
-}
-}
+      // Decrease player health and constrain it to its possible range
+      player.health -= player.healthGainPerEat * 5;
+      //this.health = constrain(this.health, 0, this.maxHealth);
+      // Decrease supply health by the same amount
+      this.health -= player.healthGainPerEat;
+      // Check if the supply died and reset it if so
+      if (this.health < 2) {
+        this.reset();
+      }
+    }
+  }
 }
