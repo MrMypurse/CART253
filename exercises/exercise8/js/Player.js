@@ -21,8 +21,8 @@ class Player {
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
-    this.healthLossPerMove = 0.01;
-    this.healthGainPerEat = 5;
+    this.healthLossPerMove = 0.07;
+    this.healthGainPerEat = 1;
     // Display properties
     this.fillColor = fillColor;
     this.radius = this.health; // Radius is defined in terms of health
@@ -91,11 +91,16 @@ class Player {
     let d = dist(this.x, this.y, supply.x, supply.y);
     // Check if the distance is less than their two radii (an overlap)
     if (d < this.radius + supply.radius) {
-      // Increase player health and constrain it to its possible range
-      this.health += this.healthGainPerEat;
+      if (supply instanceof Waste === false){
+        // Increase player health and constrain it to its possible range
+        this.health += this.healthGainPerEat;
+      }else {
+        this.health -= this.healthGainPerEat * 6;
+      }
+
       this.health = constrain(this.health, 0, this.maxHealth);
       // Decrease supply health by the same amount
-      supply.health -= this.healthGainPerEat;
+      supply.health -= this.healthGainPerEat * 5;
       // Check if the supply died and reset it if so
       if (supply.health < 2) {
         supply.reset();

@@ -113,7 +113,7 @@ class Waste {
     // Check if the distance is less than their two radii (an overlap)
     if (d2 < this.radius + player.radius) {
       // Decrease player health and constrain it to its possible range
-      player.health -= player.healthGainPerEat * 6;
+      //player.health -= player.healthGainPerEat * 6;
       //this.health = constrain(this.healtsh, 0, this.maxHealth);
       // Decrease supply health by the same amount
       this.health -= player.healthGainPerEat;

@@ -148,7 +148,7 @@ function displayGameplay() {
   player.handleEating(firstAid);
   //Player's health reduces when eating toxic wastes
 
-  toxicWaste.handleAttacking(player);
+  //toxicWaste.handleAttacking(player);
 
   //Check if the player is dead and to end game
   player.endGame();
