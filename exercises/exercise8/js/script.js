@@ -15,6 +15,10 @@ let battery;
 let firstAid;
 let toxicWaste;
 
+// The health bar and the battery bar
+let healthBar;
+let batteryBar;
+
 // Array for supply
 let supply = [];
 
@@ -38,6 +42,7 @@ function preload() {
 function setup() {
   createCanvas(1050, 700);
   player = new Player(width / 2, height - 100, 5, color(255, 255, 255), 40);
+
   for (let i = 0; i < 5; i++) {
     water = new Supply(random(0, width), random(0, 30), random(2, 5), color(166, 236, 255), 30);
     supply.push(water);
@@ -58,6 +63,8 @@ function setup() {
     toxicWaste = new Waste(random(0, width), random(0, 30), random(2, 5), color(196, 48, 255), 20);
     supply.push(toxicWaste);
   }
+  //create the health bar
+  healthBar = new HealthBar(1020, 50, color(252, 215, 3), 30);
 }
 
 
@@ -155,4 +162,8 @@ function displayGameplay() {
   // Display the player
   player.display();
   console.log(player.health);
+
+  // display health (health bar)
+  healthBar.updateHealth(player.health);
+  healthBar.display();
 }

@@ -87,14 +87,15 @@ class Player {
   // overlaps it. If so, reduces the supply's health and increases
   // the player's. If the supply dies, it gets reset.
   handleEating(supply) {
-    // Calculate distance from this player to the supply
+    // Calculate distance from this player to the supply and the waste
     let d = dist(this.x, this.y, supply.x, supply.y);
-    // Check if the distance is less than their two radii (an overlap)
+    // Check if the distance is less than their two radius (an overlap)
     if (d < this.radius + supply.radius) {
       if (supply instanceof Waste === false){
-        // Increase player health and constrain it to its possible range
+        // Increase player health when touching supply
         this.health += this.healthGainPerEat;
       }else {
+        // Decrease player health when touching wastes
         this.health -= this.healthGainPerEat * 6;
       }
 
