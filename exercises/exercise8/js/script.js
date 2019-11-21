@@ -64,7 +64,7 @@ function setup() {
     supply.push(toxicWaste);
   }
   //create the health bar
-  healthBar = new HealthBar(1020, 50, color(252, 215, 3), 30);
+  healthBar = new HealthBar(1020, 50, color(252, 215, 3), 20);
 }
 
 
