@@ -20,6 +20,17 @@ let supply = [];
 
 //set up game state
 let state = "INSTRUCTION";
+
+//menu images and end game images
+let backgroundImg;
+
+
+// preload()
+//
+//Preload sounds and images
+function preload() {
+  backgroundImg = loadImage("assets/images/background.png");
+}
 // setup()
 //
 // Sets up a canvas
@@ -116,6 +127,7 @@ function displayGameover() {
 //displayGameplay()
 //display gameplay: player, supply , enemy
 function displayGameplay() {
+  image(backgroundImg, 0, 0, 1050, 700);
   // Handle input for the player
   player.handleInput();
 
