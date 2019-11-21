@@ -126,9 +126,9 @@ class Player {
     if (this.health <= 0) {
       state = "GAMEOVER";
       return;
-    } else if (this.score >= 20) {
-      state = "GAMEWIN";
-      return;
+    //} else if (this.score >= 0) {
+    //  state = "GAMEWIN";
+    //  return;
     }
   }
 }

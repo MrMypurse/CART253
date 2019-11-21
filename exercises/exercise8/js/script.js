@@ -86,6 +86,10 @@ function mousePressed() {
 
 function resetGame() {
   state = "GAMEPLAY";
+  player.health = 40;
+  for (let i = 0; i < supply.length; i++) {
+    supply[i]. reset();
+  }
 }
 
 
@@ -138,4 +142,5 @@ function displayGameplay() {
   player.endGame();
   // Display the player
   player.display();
+  console.log(player.health);
 }
