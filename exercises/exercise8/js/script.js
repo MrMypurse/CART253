@@ -26,6 +26,11 @@ let supply = [];
 let state = "INSTRUCTION";
 
 //menu images and end game images
+let waterImg;
+let foodImg;
+let batteryImg;
+let firstAidImg;
+let toxicWasteImg;
 let backgroundImg;
 
 
@@ -34,6 +39,13 @@ let backgroundImg;
 //Preload sounds and images
 function preload() {
   backgroundImg = loadImage("assets/images/background.png");
+  waterImg = loadImage("assets/images/water.png");
+  foodImg = loadImage("assets/images/meat.png");
+  batteryImg = loadImage("assets/images/battery.png");
+  firstAidImg = loadImage("assets/images/firstAid.png");
+  toxicWasteImg = loadImage("assets/images/badMeat.png");
+
+
 }
 // setup()
 //
@@ -44,23 +56,23 @@ function setup() {
   player = new Player(width / 2, height - 100, 5, color(255, 255, 255), 40);
 
   for (let i = 0; i < 5; i++) {
-    water = new Supply(random(0, width), random(0, 30), random(2, 5), color(166, 236, 255), 30);
+    water = new Supply(random(0, width), random(0, 30), random(2, 5), 30, waterImg);
     supply.push(water);
   }
   for (let i = 0; i < 5; i++) {
-    food = new Supply(random(0, width), random(0, 30), random(2, 5), color(242, 177, 65), 30);
+    food = new Supply(random(0, width), random(0, 30), random(2, 5), 30, foodImg);
     supply.push(food);
   }
   for (let i = 0; i < 2; i++) {
-    battery = new Supply(random(0, width), random(0, 30), random(2, 5), color(66, 48, 255), 20);
+    battery = new Supply(random(0, width), random(0, 30), random(2, 5), 20, batteryImg);
     supply.push(battery);
   }
   for (let i = 0; i < 2; i++) {
-    firstAid = new Supply(random(0, width), random(0, 30), random(2, 5), color(48, 255, 55), 20);
+    firstAid = new Supply(random(0, width), random(0, 30), random(2, 5), 20, firstAidImg);
     supply.push(firstAid);
   }
   for (let i = 0; i < 2; i++) {
-    toxicWaste = new Waste(random(0, width), random(0, 30), random(2, 5), color(196, 48, 255), 20);
+    toxicWaste = new Waste(random(0, width), random(0, 30), random(2, 5), 20, toxicWasteImg);
     supply.push(toxicWaste);
   }
   //create the health bar

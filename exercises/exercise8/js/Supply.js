@@ -10,7 +10,7 @@ class Supply {
   //
   // Sets the initial values for the player's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, fillColor, radius) {
+  constructor(x, y, speed, radius, supplyImage) {
     // Position
     this.x = x;
     this.y = y;
@@ -27,6 +27,8 @@ class Supply {
     // Display properties
     this.fillColor = fillColor;
     this.radius = this.health;
+    //Display images
+    this.image = supplyImage;
   }
 
   // move
@@ -77,7 +79,7 @@ class Supply {
     fill(this.fillColor);
     this.radius = this.health;
     if (this.radius > 2){
-    ellipse(this.x, this.y, this.radius * 2);
+    image(this.image,this.x, this.y, this.radius * 2);
     }
     pop();
   }
