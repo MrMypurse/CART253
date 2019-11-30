@@ -42,7 +42,7 @@ function preload() {
   waterImg = loadImage("assets/images/water.png");
   foodImg = loadImage("assets/images/meat.png");
   batteryImg = loadImage("assets/images/battery.png");
-  firstAidImg = loadImage("assets/images/firstAid.png");
+  firstAidImg = loadImage("assets/images/firstaid.png");
   toxicWasteImg = loadImage("assets/images/badMeat.png");
 
 
