@@ -8,7 +8,7 @@
 // Our player
 let player;
 
-// The four supply
+// The four supply and the toxic waste
 let water;
 let food;
 let battery;
@@ -19,19 +19,24 @@ let toxicWaste;
 let healthBar;
 let batteryBar;
 
+//The Flashlight
+let flashlight;
+let flashOn = true;
+
 // Array for supply
 let supply = [];
 
 //set up game state
 let state = "INSTRUCTION";
 
-//menu images and end game images
+//set up images and sounds
 let waterImg;
 let foodImg;
 let batteryImg;
 let firstAidImg;
 let toxicWasteImg;
 let backgroundImg;
+let flashImage;
 
 
 // preload()
@@ -44,6 +49,7 @@ function preload() {
   batteryImg = loadImage("assets/images/battery.png");
   firstAidImg = loadImage("assets/images/firstAid.png");
   toxicWasteImg = loadImage("assets/images/badMeat.png");
+  flashImage = loadImage("assets/images/flashlightOn.png");
 
 
 }
@@ -77,6 +83,8 @@ function setup() {
   }
   //create the health bar
   healthBar = new HealthBar(1020, 50, color(252, 215, 3), 20);
+  //create the Flashlight
+  flashlight = new Flashlight(mouseX, mouseY, flashImage);
 }
 
 
@@ -178,4 +186,8 @@ function displayGameplay() {
   // display health (health bar)
   healthBar.updateHealth(player.health);
   healthBar.display();
+
+  //display flashlight
+  flashlight.mousePressed();
+  flashlight.toggleFlash();
 }
