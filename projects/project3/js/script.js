@@ -77,6 +77,8 @@ function setup() {
   }
   //create the health bar
   healthBar = new HealthBar(1020, 50, color(252, 215, 3), 20);
+  //create the battery bar
+  batteryBar = new BatteryBar(1020, 80, color(0, 8, 255), 20);
 }
 
 
@@ -178,4 +180,7 @@ function displayGameplay() {
   // display health (health bar)
   healthBar.updateHealth(player.health);
   healthBar.display();
+
+  //display flashlight battery (battery bar)
+  batteryBar.display();
 }
