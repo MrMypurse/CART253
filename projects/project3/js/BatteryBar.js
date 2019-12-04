@@ -4,7 +4,7 @@
 // the width of bar is relative to the health
 
 
-class BatteryBar {
+class HealthBar {
   // constructor
   //
   // Sets the initial values for the ScoreBar's properties
@@ -16,7 +16,7 @@ class BatteryBar {
     // Score properties
     // Display properties
     this.fillColor = fillColor;
-    //this.width = battery;
+    this.width = player.health;
     this.height = height;
   }
 
@@ -34,7 +34,7 @@ class BatteryBar {
   }
 
     // width is defined in terms of the player's health
-//  updateBattery( ) {
-//    this.width = health * 2.5;
+  updateHealth(health) {
+    this.width = health * 2.5;
   }
 }
