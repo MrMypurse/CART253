@@ -98,7 +98,6 @@ class Player {
         // Decrease player health when touching wastes
         this.health -= this.healthGainPerEat * 6;
       }
-
       this.health = constrain(this.health, 0, this.maxHealth);
       // Decrease supply health by the same amount
       supply.health -= this.healthGainPerEat * 5;
@@ -106,6 +105,23 @@ class Player {
       if (supply.health < 2) {
         supply.reset();
       }
+    }
+  }
+
+  handleHealing(firstAid){
+    //Calculate distance from this player to the firstaid kit
+    let d2 = dist(this.x, this.y, firstAid.x, firstAid.y);
+    //Check if the distance is less than their two radius(an overlap)
+    if(d2 < this.radius + firstAid.radius){
+      this.health += this.healthGainPerEat * 5;
+      this.health = constrain(this.health, 0 , this.maxHealth);
+      //Decrease firstaid kit health by the same amount
+      firstAid.health -= this.healthGainPerEat * 5;
+    }
+
+    //Check if the firstaid kit died and reset it if so
+    if (firstAid.health < 2){
+      firstAid.reset();
     }
   }
 

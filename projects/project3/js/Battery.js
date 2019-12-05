@@ -11,5 +11,5 @@ class Battery extends Supply {
   // Sets the initial values for the player's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, radius, supplyImage) {
-    super(x, y, speed, radius, supplyImage)
+    super(x, y, speed, radius, supplyImage);
   }
