@@ -11,6 +11,10 @@ class Flashlight {
     // Position
     this.x = x;
     this.y = y;
+    //Battery properties
+    this.batteryLevel = this.maxBatteryLevel; // Must be AFTER defining this.maxHealth
+    this.batteryLossPerMove = 0.07;
+    this.batteryGainPerEat = 1;
     //Display Properties
     this.flashOn = flashOn;
     imageMode(CENTER);
@@ -26,4 +30,12 @@ class Flashlight {
       rect(window.width/2, window.height/2, window.width, window.height);
     }
   }
+
+  mousePressed() {
+    // Horizontal movement
+    if (flashOn === true) {
+
+
+
+}
 }

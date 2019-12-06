@@ -55,6 +55,8 @@ function setup() {
   createCanvas(1050, 700);
   player = new Player(width / 2, height - 50, 5, color(255, 255, 255), 40);
   firstAid = new FirstAid(random(0, width), random(0, 30), random(3, 6), 30, firstAidImg);
+  battery = new Battery(random(0, width), random(0, 30), random(3, 6), 25, batteryImg);
+
 
   for (let i = 0; i < 5; i++) {
     water = new Supply(random(0, width), random(0, 30), random(2, 4), 35, waterImg);
@@ -63,10 +65,6 @@ function setup() {
   for (let i = 0; i < 5; i++) {
     food = new Supply(random(0, width), random(0, 30), random(2, 4), 30, foodImg);
     supply.push(food);
-  }
-  for (let i = 0; i < 2; i++) {
-    battery = new Supply(random(0, width), random(0, 30), random(3, 6), 25, batteryImg);
-    supply.push(battery);
   }
   for (let i = 0; i < 2; i++) {
     toxicWaste = new Waste(random(0, width), random(0, 30), random(2, 6), 40, toxicWasteImg);
@@ -162,12 +160,15 @@ function displayGameplay() {
   firstAid.move();
   firstAid.display();
 
+  //Display battery
+  battery.move();
+  battery.display();
+
   // Handle the player collecting any of the supply
   player.handleEating(water);
   player.handleEating(food);
   player.handleEating(battery);
   player.handleHealing(firstAid);
-
 
 
 
