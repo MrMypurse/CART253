@@ -23,7 +23,7 @@ let batteryBar;
 let supply = [];
 
 //set up game state
-let state = "INSTRUCTION";
+let state = "TITLE";
 
 //menu images and end game images
 let waterImg;
@@ -32,6 +32,10 @@ let batteryImg;
 let firstAidImg;
 let toxicWasteImg;
 let backgroundImg;
+let titleImg;
+let instructionImg;
+let winImg;
+let loseImg;
 
 
 // preload()
@@ -44,7 +48,10 @@ function preload() {
   batteryImg = loadImage("assets/images/battery.png");
   firstAidImg = loadImage("assets/images/firstAid.png");
   toxicWasteImg = loadImage("assets/images/badMeat.png");
-
+  titleImg = loadImage("assets/images/title.png");
+  instructionImg = loadImage("assets/images/instruction.png");
+  winImg = loadImage("assets/images/win.png");
+  loseImg = loadImage("assets/images/lose.png");
 
 }
 // setup()
@@ -52,7 +59,7 @@ function preload() {
 // Sets up a canvas
 // Creates objects for the player and three supply
 function setup() {
-  createCanvas(1050, 700);
+  createCanvas(1150, 700);
   player = new Player(width / 2, height - 50, 5, color(255, 255, 255), 40);
   firstAid = new FirstAid(random(0, width), random(0, 30), random(3, 6), 30, firstAidImg);
   battery = new Battery(random(0, width), random(0, 30), random(3, 6), 25, batteryImg);
@@ -85,7 +92,10 @@ function setup() {
 function draw() {
   // Clear the background to black
   background(0);
-  if (state === "INSTRUCTION") {
+  if (state === "TITLE") {
+    displayTitle();
+  }
+  else if (state === "INSTRUCTION") {
     displayInstruction();
 
   } else if (state === "GAMEPLAY") {
@@ -104,7 +114,9 @@ function draw() {
 //mousePressed()
 // start game when mouse is pressed
 function mousePressed() {
-  if (state === "INSTRUCTION") {
+  if (state === "TITLE"){
+    state = "INSTRUCTION";
+  } else if (state === "INSTRUCTION") {
     state = "GAMEPLAY";
   } else if (state === "GAMEOVER" || state === "GAMEWIN") {
     resetGame();
@@ -119,31 +131,35 @@ function resetGame() {
   }
 }
 
-
+//displayTitle()
+//display title screen
+function displayTitle() {
+  image(titleImg, 0, 0, 1150, 700);
+}
 //displayInstruction()
 //display instruction screen
 function displayInstruction() {
-  background(255, 0, 0);
+  image(instructionImg, 0, 0, 1150, 700);
 }
 
 
 //displayGamewin()
 //tell player that they won after reaching certain score
 function displayGamewin() {
-  background(0, 255, 0);
+  image(winImg, 0, 0, 1150, 700);
 }
 
 
 //displayGameover()
 //display gameover screen when player dies
 function displayGameover() {
-  background(0, 0, 255);
+  image(loseImg, 0, 0, 1150, 700);
 }
 
 //displayGameplay()
 //display gameplay: player, supply , enemy
 function displayGameplay() {
-  image(backgroundImg, 0, 0, 1050, 700);
+  image(backgroundImg, 0, 0, 1150, 700);
   // Handle input for the player
   player.handleInput();
 
