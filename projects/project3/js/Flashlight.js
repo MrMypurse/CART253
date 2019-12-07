@@ -33,7 +33,7 @@ class Flashlight {
       if (player.batteryLevel > 0) {
         image(this.image, mouseX, mouseY, 3000, 3000);
       } else {
-        fill(255);
+        fill(0);
         rect(0, 0, window.width, window.height);
       }
     }

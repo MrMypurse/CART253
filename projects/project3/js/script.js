@@ -198,15 +198,15 @@ function displayGameplay() {
   player.handleCharging(battery);
   player.handleHealing(firstAid);
 
-  //display the flashlight
-  flashlight.mousePressed();
-  flashlight.display();
-  console.log(player.batteryLevel);
-
   //Check if the player is dead and to end game
   player.endGame();
   // Display the player
   player.display();
+
+  //display the flashlight
+  flashlight.mousePressed();
+  flashlight.display();
+  console.log(player.batteryLevel);
 
   // display health (health bar)
   healthBar.updateHealth(player.health);
