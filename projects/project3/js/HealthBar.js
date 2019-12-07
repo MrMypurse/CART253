@@ -9,7 +9,7 @@ class HealthBar {
   //
   // Sets the initial values for the ScoreBar's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, fillColor, height) {
+  constructor(x, y, fillColor, height, healthLogoImage) {
     // Position
     this.x = x;
     this.y = y;
@@ -18,6 +18,7 @@ class HealthBar {
     this.fillColor = fillColor;
     this.width = player.health;
     this.height = height;
+    this.image = healthLogoImage;
   }
 
   // display
@@ -30,6 +31,7 @@ class HealthBar {
     noStroke();
     fill(this.fillColor);
     rect(this.x, this.y, -this.width, this.height);
+    image(this.image, this.x + 20, this.y + 10, 30, 30 );
     pop();
   }
 

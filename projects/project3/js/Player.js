@@ -26,7 +26,7 @@ class Player {
     //battery Properties
     this.maxBatteryLevel = batteryLevel;
     this.batteryLevel = this.maxBatteryLevel;
-    this.batteryLossPerMove = 0.05;
+    this.batteryLossPerMove = 0.03;
     this.batteryGainPerEat = 1;
     // Display properties
     this.radius = this.health; // Radius is defined in terms of health
@@ -173,7 +173,7 @@ class Player {
     if (this.health <= 0) {
       state = "GAMEOVER";
       return;
-    } else if (this.score >= 50) {
+    } else if (this.score >= 40) {
       state = "GAMEWIN";
       return;
     }

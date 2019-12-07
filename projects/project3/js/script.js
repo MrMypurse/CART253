@@ -42,6 +42,8 @@ let winImg;
 let loseImg;
 let playerImg;
 let flashImg;
+let batteryLogo;
+let heartLogo;
 
 
 // preload()
@@ -60,6 +62,8 @@ function preload() {
   loseImg = loadImage("assets/images/lose.png");
   playerImg = loadImage("assets/images/cat.png");
   flashImg = loadImage ("assets/images/flashlightOn.png");
+  batteryLogo = loadImage("assets/images/batteryLogo.png");
+  healthLogo = loadImage("assets/images/heartLogo.png");
 
 }
 // setup()
@@ -73,9 +77,9 @@ function setup() {
   battery = new Battery(random(0, width), random(0, 30), random(3, 6), 25, batteryImg);
   flashlight = new Flashlight(0, 0, flashImg);
   //create the health bar
-  healthBar = new HealthBar(1020, 50, color(179, 0, 0), 20);
+  healthBar = new HealthBar(1020, 50, color(179, 0, 0), 20, healthLogo);
   //create the battery bar
-  batteryBar = new BatteryBar(1020, 80, color(0, 8, 255), 20);
+  batteryBar = new BatteryBar(1020, 80, color(0, 8, 255), 20, batteryLogo);
 
 //create supplies using array
   for (let i = 0; i < 5; i++) {
@@ -138,6 +142,7 @@ function resetGame() {
   state = "GAMEPLAY";
   player.health = 50;
   player.score = 0;
+  player.batteryLevel = 50;
   for (let i = 0; i < supply.length; i++) {
     supply[i].reset();
   }
