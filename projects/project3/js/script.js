@@ -8,12 +8,16 @@
 // Our player
 let player;
 
-// The four supply
+// The supplies, including enemies
 let water;
 let food;
 let battery;
 let firstAid;
 let toxicWaste;
+
+//The Flashlight
+let flashlight;
+let flashOn = true;
 
 // The health bar and the battery bar
 let healthBar;
@@ -25,7 +29,7 @@ let supply = [];
 //set up game state
 let state = "TITLE";
 
-//menu images and end game images
+//All images and sounds
 let waterImg;
 let foodImg;
 let batteryImg;
@@ -36,6 +40,8 @@ let titleImg;
 let instructionImg;
 let winImg;
 let loseImg;
+let playerImg;
+let flashImg;
 
 
 // preload()
@@ -52,6 +58,8 @@ function preload() {
   instructionImg = loadImage("assets/images/instruction.png");
   winImg = loadImage("assets/images/win.png");
   loseImg = loadImage("assets/images/lose.png");
+  playerImg = loadImage("assets/images/cat.png");
+  flashImg = loadImage ("assets/images/flashlightOn.png");
 
 }
 // setup()
@@ -60,25 +68,26 @@ function preload() {
 // Creates objects for the player and three supply
 function setup() {
   createCanvas(1150, 700);
-  player = new Player(width / 2, height - 50, 5, color(255, 255, 255), 40);
+  player = new Player(width / 2, height - 120, 5, 40, playerImg);
   firstAid = new FirstAid(random(0, width), random(0, 30), random(3, 6), 30, firstAidImg);
   battery = new Battery(random(0, width), random(0, 30), random(3, 6), 25, batteryImg);
+  flashlight = new Flashlight(0, 0, 50, flashImg);
 
-
+//create supplies using array
   for (let i = 0; i < 5; i++) {
-    water = new Supply(random(0, width), random(0, 30), random(2, 4), 35, waterImg);
+    water = new Supply(random(0, width), random(0, 30), random(2, 5), 35, waterImg);
     supply.push(water);
   }
   for (let i = 0; i < 5; i++) {
-    food = new Supply(random(0, width), random(0, 30), random(2, 4), 30, foodImg);
+    food = new Supply(random(0, width), random(0, 30), random(2, 5), 30, foodImg);
     supply.push(food);
   }
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 4; i++) {
     toxicWaste = new Waste(random(0, width), random(0, 30), random(2, 6), 40, toxicWasteImg);
     supply.push(toxicWaste);
   }
   //create the health bar
-  healthBar = new HealthBar(1020, 50, color(252, 215, 3), 20);
+  healthBar = new HealthBar(1020, 50, color(179, 0, 0), 20);
   //create the battery bar
   batteryBar = new BatteryBar(1020, 80, color(0, 8, 255), 20);
 }
@@ -94,8 +103,7 @@ function draw() {
   background(0);
   if (state === "TITLE") {
     displayTitle();
-  }
-  else if (state === "INSTRUCTION") {
+  } else if (state === "INSTRUCTION") {
     displayInstruction();
 
   } else if (state === "GAMEPLAY") {
@@ -114,7 +122,7 @@ function draw() {
 //mousePressed()
 // start game when mouse is pressed
 function mousePressed() {
-  if (state === "TITLE"){
+  if (state === "TITLE") {
     state = "INSTRUCTION";
   } else if (state === "INSTRUCTION") {
     state = "GAMEPLAY";
@@ -123,43 +131,46 @@ function mousePressed() {
   }
 }
 
+//resetGame()
+// restart game by resetting player and supplies
 function resetGame() {
   state = "GAMEPLAY";
   player.health = 40;
+  player.score = 0;
   for (let i = 0; i < supply.length; i++) {
-    supply[i]. reset();
+    supply[i].reset();
   }
 }
 
 //displayTitle()
 //display title screen
 function displayTitle() {
-  image(titleImg, 0, 0, 1150, 700);
+  image(titleImg, width/2, height/2, 1150, 700);
 }
 //displayInstruction()
 //display instruction screen
 function displayInstruction() {
-  image(instructionImg, 0, 0, 1150, 700);
+  image(instructionImg, width/2, height/2, 1150, 700);
 }
 
 
 //displayGamewin()
 //tell player that they won after reaching certain score
 function displayGamewin() {
-  image(winImg, 0, 0, 1150, 700);
+  image(winImg, width/2, height/2, 1150, 700);
 }
 
 
 //displayGameover()
 //display gameover screen when player dies
 function displayGameover() {
-  image(loseImg, 0, 0, 1150, 700);
+  image(loseImg, width/2, height/2, 1150, 700);
 }
 
 //displayGameplay()
 //display gameplay: player, supply , enemy
 function displayGameplay() {
-  image(backgroundImg, 0, 0, 1150, 700);
+  image(backgroundImg, width/2, height/2, 1150, 700);
   // Handle input for the player
   player.handleInput();
 
@@ -186,13 +197,15 @@ function displayGameplay() {
   player.handleEating(battery);
   player.handleHealing(firstAid);
 
-
+  //display the flashlight
+  flashlight.toggleFlash();
+  flashlight.display();
+  console.log(flashlight.batteryLevel);
 
   //Check if the player is dead and to end game
   player.endGame();
   // Display the player
   player.display();
-  console.log(player.health);
 
   // display health (health bar)
   healthBar.updateHealth(player.health);

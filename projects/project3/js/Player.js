@@ -10,7 +10,7 @@ class Player {
   //
   // Sets the initial values for the player's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, fillColor, radius) {
+  constructor(x, y, speed, radius, playerImage) {
     // Position
     this.x = x;
     this.y = y;
@@ -24,11 +24,13 @@ class Player {
     this.healthLossPerMove = 0.07;
     this.healthGainPerEat = 1;
     // Display properties
-    this.fillColor = fillColor;
     this.radius = this.health; // Radius is defined in terms of health
+    this.image = playerImage;
     // Input properties
     this.leftKey = 65;
     this.rightKey = 68;
+    //Initial Score
+    this.score = 0;
   }
 
   // handleInput
@@ -91,10 +93,10 @@ class Player {
     let d = dist(this.x, this.y, supply.x, supply.y);
     // Check if the distance is less than their two radius (an overlap)
     if (d < this.radius + supply.radius) {
-      if (supply instanceof Waste === false){
+      if (supply instanceof Waste === false) {
         // Increase player health when touching supply
         this.health += this.healthGainPerEat;
-      }else {
+      } else {
         // Decrease player health when touching wastes
         this.health -= this.healthGainPerEat * 6;
       }
@@ -102,25 +104,26 @@ class Player {
       // Decrease supply health by the same amount
       supply.health -= this.healthGainPerEat * 5;
       // Check if the supply died and reset it if so
-      if (supply.health < 2) {
+      if (supply.health < 3) {
+        this.score = this.score + 1;
         supply.reset();
       }
     }
   }
 
-  handleHealing(firstAid){
+  handleHealing(firstAid) {
     //Calculate distance from this player to the firstaid kit
     let d2 = dist(this.x, this.y, firstAid.x, firstAid.y);
     //Check if the distance is less than their two radius(an overlap)
-    if(d2 < this.radius + firstAid.radius){
+    if (d2 < this.radius + firstAid.radius) {
       this.health += this.healthGainPerEat * 5;
-      this.health = constrain(this.health, 0 , this.maxHealth);
+      this.health = constrain(this.health, 0, this.maxHealth);
       //Decrease firstaid kit health by the same amount
       firstAid.health -= this.healthGainPerEat * 5;
     }
 
     //Check if the firstaid kit died and reset it if so
-    if (firstAid.health < 2){
+    if (firstAid.health < 2) {
       firstAid.reset();
     }
   }
@@ -133,10 +136,9 @@ class Player {
   display() {
     push();
     noStroke();
-    fill(this.fillColor);
     this.radius = this.health;
-    if (this.radius > 2) {
-      ellipse(this.x, this.y, this.radius * 2);
+    if (this.radius > 3) {
+      image(this.image, this.x, this.y, this.radius * 2.5, this.radius * 2.5);
     }
     pop();
   }
@@ -148,9 +150,9 @@ class Player {
     if (this.health <= 0) {
       state = "GAMEOVER";
       return;
-    //} else if (this.score >= 0) {
-    //  state = "GAMEWIN";
-    //  return;
+    } else if (this.score >= 50) {
+      state = "GAMEWIN";
+      return;
     }
   }
 }

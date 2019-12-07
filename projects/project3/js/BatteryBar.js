@@ -16,7 +16,8 @@ class BatteryBar {
     // Score properties
     // Display properties
     this.fillColor = fillColor;
-    this.width = 100;
+    this.width = width;
+    flashlight.batteryLevel = this.width;
     this.height = height;
   }
 
@@ -33,8 +34,8 @@ class BatteryBar {
     pop();
   }
 
-    // width is defined in terms of the player's health
-  //updateHealth(health) {
-    //this.width = health * 2.5;
-  //}
+  // width is defined in terms of the player's health
+  updateBattery(batteryLevel) {
+    this.width = batteryLevel * 2.5;
+  }
 }

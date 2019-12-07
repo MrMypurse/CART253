@@ -74,11 +74,10 @@ class FirstAid {
     push();
     noStroke();
     this.radius = this.health;
-    if (this.radius > 2){
-    image(this.image, this.x, this.y, this.radius * 2, this.radius * 2);
+    if (this.radius > 2) {
+      image(this.image, this.x, this.y, this.radius * 2, this.radius * 2);
     }
     pop();
-    console.log(this.health);
   }
 
   // reset

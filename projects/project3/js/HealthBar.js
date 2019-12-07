@@ -33,7 +33,7 @@ class HealthBar {
     pop();
   }
 
-    // width is defined in terms of the player's health
+  // width is defined in terms of the player's health
   updateHealth(health) {
     this.width = health * 2.5;
   }
