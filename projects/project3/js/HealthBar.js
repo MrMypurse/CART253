@@ -25,7 +25,6 @@ class HealthBar {
   //
   // Draw the health bar as a rectangle on the canvas
   // with a width the same size as its current health.
-
   display() {
     push();
     noStroke();

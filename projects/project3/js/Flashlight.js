@@ -15,7 +15,6 @@ class Flashlight {
     imageMode(CENTER);
     rectMode(CORNER);
     this.image = flashImage;
-    //create blakc image with transparency in the middle.
   }
 
   //displaying
