@@ -68,10 +68,10 @@ function preload() {
 // Creates objects for the player and three supply
 function setup() {
   createCanvas(1150, 700);
-  player = new Player(width / 2, height - 120, 5, 50, playerImg);
+  player = new Player(width / 2, height - 120, 5, 50, 50, playerImg);
   firstAid = new FirstAid(random(0, width), random(0, 30), random(3, 6), 30, firstAidImg);
   battery = new Battery(random(0, width), random(0, 30), random(3, 6), 25, batteryImg);
-  flashlight = new Flashlight(0, 0, 50, flashImg);
+  flashlight = new Flashlight(0, 0, flashImg);
   //create the health bar
   healthBar = new HealthBar(1020, 50, color(179, 0, 0), 20);
   //create the battery bar
@@ -195,13 +195,13 @@ function displayGameplay() {
   // Handle the player collecting any of the supply
   player.handleEating(water);
   player.handleEating(food);
-  player.handleEating(battery);
+  player.handleCharging(battery);
   player.handleHealing(firstAid);
 
   //display the flashlight
-  flashlight.toggleFlash();
+  flashlight.mousePressed();
   flashlight.display();
-  console.log(flashlight.batteryLevel);
+  console.log(player.batteryLevel);
 
   //Check if the player is dead and to end game
   player.endGame();
@@ -214,4 +214,5 @@ function displayGameplay() {
 
   //display flashlight battery (battery bar)
   batteryBar.display();
+  batteryBar.updateBattery(player.batteryLevel);
 }

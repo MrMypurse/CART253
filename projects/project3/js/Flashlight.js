@@ -7,15 +7,10 @@ class Flashlight {
   //
   // Sets the initial values for the flashlight's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, batteryLevel, flashImage) {
+  constructor(x, y, flashImage) {
     // Position
     this.x = x;
     this.y = y;
-    //Battery properties
-    this.maxBatteryLevel = batteryLevel;
-    this.batteryLevel = this.maxBatteryLevel;
-    this.batteryLossPerMove = 0.5;
-    this.batteryGainPerEat = 2;
     //Display Properties
     imageMode(CENTER);
     rectMode(CORNER);
@@ -23,8 +18,7 @@ class Flashlight {
     //create blakc image with transparency in the middle.
   }
 
-  toggleFlash() {
-    if (mouseIsPressed) {
+  mousePressed() {
       if (flashOn === true) {
         flashOn === false;
         return;
@@ -32,15 +26,15 @@ class Flashlight {
         flashOn === true;
         return;
       }
-    }
   }
 
   display() {
     if (flashOn === true){
-      if (this.batteryLevel > 0) {
+      if (player.batteryLevel > 0) {
         image(this.image, mouseX, mouseY, 3000, 3000);
       } else {
-        rect(window.width / 2, window.height / 2, window.width, window.height);
+        fill(255);
+        rect(0, 0, window.width, window.height);
       }
     }
   }

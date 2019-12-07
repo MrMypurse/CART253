@@ -10,7 +10,7 @@ class Player {
   //
   // Sets the initial values for the player's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, radius, playerImage) {
+  constructor(x, y, speed, radius, batteryLevel, playerImage) {
     // Position
     this.x = x;
     this.y = y;
@@ -23,6 +23,11 @@ class Player {
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
     this.healthLossPerMove = 0.07;
     this.healthGainPerEat = 1;
+    //battery Properties
+    this.maxBatteryLevel = batteryLevel;
+    this.batteryLevel = this.maxBatteryLevel;
+    this.batteryLossPerMove = 0.05;
+    this.batteryGainPerEat = 1;
     // Display properties
     this.radius = this.health; // Radius is defined in terms of health
     this.image = playerImage;
@@ -60,6 +65,9 @@ class Player {
     // Update health
     this.health = this.health - this.healthLossPerMove;
     this.health = constrain(this.health, 0, this.maxHealth);
+    //Update battery
+    this.batteryLevel = this.batteryLevel - this.batteryLossPerMove;
+    this.batteryLevel = constrain(this.batteryLevel, 0, this.maxBatteryLevel);
     // Handle wrapping
     this.handleWrapping();
   }
@@ -133,10 +141,10 @@ class Player {
     let d3 = dist(this.x, this.y, battery.x, battery.y);
     //Check if the distance is less than their two radius(an overlap)
     if (d3 < this.radius + battery.radius) {
-      flashlight.batteryLevel += flashlight.batteryGainPerEat * 5;
-      flashlight.batteryLevel = constrain(flashlight.batteryLevel, 0, flashlight.maxBatteryLevel);
+      this.batteryLevel += this.batteryGainPerEat * 5;
+      this.batteryLevel = constrain(this.batteryLevel, 0, this.maxBatteryLevel);
       //Decrease firstaid kit health by the same amount
-      battery.health -= flashlight.batteryGainPerEat * 5;
+      battery.health -= this.batteryGainPerEat * 5;
     }
     //Check if the firstaid kit died and reset it if so
     if (battery.health < 2) {

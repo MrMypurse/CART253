@@ -16,8 +16,7 @@ class BatteryBar {
     // Score properties
     // Display properties
     this.fillColor = fillColor;
-    this.width = width;
-    flashlight.batteryLevel = this.width;
+    this.width = player.batteryLevel;
     this.height = height;
   }
 
