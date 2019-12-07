@@ -18,24 +18,15 @@ class Flashlight {
     //create blakc image with transparency in the middle.
   }
 
-  mousePressed() {
-      if (flashOn === true) {
-        flashOn === false;
-        return;
-      } else {
-        flashOn === true;
-        return;
-      }
-  }
-
+  //displaying
+  //
+  // Draw the flashlighton the canvas
   display() {
-    if (flashOn === true){
-      if (player.batteryLevel > 0) {
-        image(this.image, mouseX, mouseY, 3000, 3000);
-      } else {
-        fill(0);
-        rect(0, 0, window.width, window.height);
-      }
+    if (player.batteryLevel > 0) {
+      image(this.image, mouseX, mouseY, 3000, 3000);
+    } else {
+      fill(0);
+      rect(0, 0, window.width, window.height);
     }
   }
 }

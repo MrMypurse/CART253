@@ -31,12 +31,15 @@ class HealthBar {
     noStroke();
     fill(this.fillColor);
     rect(this.x, this.y, -this.width, this.height);
-    image(this.image, this.x + 20, this.y + 10, 30, 30 );
+    image(this.image, this.x + 20, this.y + 10, 30, 30);
     pop();
   }
 
-  // width is defined in terms of the player's health
+  //updateHealth
+  //
+  //update the health bar's width in relation to the player's health
   updateHealth(health) {
+    // width is defined in terms of the player's health
     this.width = health * 2.5;
   }
 }

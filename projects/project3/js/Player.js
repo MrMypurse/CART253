@@ -106,7 +106,7 @@ class Player {
         this.health += this.healthGainPerEat;
       } else {
         // Decrease player health when touching wastes
-        this.health -= this.healthGainPerEat * 6;
+        this.health -= this.healthGainPerEat * 5;
       }
       this.health = constrain(this.health, 0, this.maxHealth);
       // Decrease supply health by the same amount
@@ -119,6 +119,11 @@ class Player {
     }
   }
 
+  // handleHealing
+  //
+  // Takes a supply object as an argument and checks if the player
+  // overlaps it. If so, decreases the supply's health and increases
+  // the player's. If the supply dies, it gets reset.
   handleHealing(firstAid) {
     //Calculate distance from this player to the firstaid kit
     let d2 = dist(this.x, this.y, firstAid.x, firstAid.y);
@@ -129,13 +134,17 @@ class Player {
       //Decrease firstaid kit health by the same amount
       firstAid.health -= this.healthGainPerEat * 5;
     }
-
     //Check if the firstaid kit died and reset it if so
     if (firstAid.health < 2) {
       firstAid.reset();
     }
   }
 
+  // handleCharging
+  //
+  // Takes a supply object as an argument and checks if the player
+  // overlaps it. If so, decreases the supply's health and increases
+  // the player's. If the supply dies, it gets reset.
   handleCharging(battery) {
     //Calculate distance from this player to the firstaid kit
     let d3 = dist(this.x, this.y, battery.x, battery.y);
@@ -143,10 +152,10 @@ class Player {
     if (d3 < this.radius + battery.radius) {
       this.batteryLevel += this.batteryGainPerEat * 5;
       this.batteryLevel = constrain(this.batteryLevel, 0, this.maxBatteryLevel);
-      //Decrease firstaid kit health by the same amount
+      //Decrease battery's health by the same amount
       battery.health -= this.batteryGainPerEat * 5;
     }
-    //Check if the firstaid kit died and reset it if so
+    //Check if the battery died and reset it if so
     if (battery.health < 2) {
       battery.reset();
     }
@@ -161,7 +170,7 @@ class Player {
     noStroke();
     this.radius = this.health;
     if (this.radius > 3) {
-      image(this.image, this.x, this.y, this.radius * 2.5, this.radius * 2.5);
+      image(this.image, this.x, this.y, this.radius * 3, this.radius * 3);
     }
     pop();
   }

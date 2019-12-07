@@ -50,18 +50,18 @@ let heartLogo;
 //
 //Preload sounds and images
 function preload() {
+  titleImg = loadImage("assets/images/title.gif");
+  instructionImg = loadImage("assets/images/instruction.gif");
+  winImg = loadImage("assets/images/win.gif");
+  loseImg = loadImage("assets/images/lose.gif");
   backgroundImg = loadImage("assets/images/background.png");
   waterImg = loadImage("assets/images/water.png");
   foodImg = loadImage("assets/images/meat.png");
   batteryImg = loadImage("assets/images/battery.png");
   firstAidImg = loadImage("assets/images/firstAid.png");
   toxicWasteImg = loadImage("assets/images/badMeat.png");
-  titleImg = loadImage("assets/images/title.png");
-  instructionImg = loadImage("assets/images/instruction.png");
-  winImg = loadImage("assets/images/win.png");
-  loseImg = loadImage("assets/images/lose.png");
   playerImg = loadImage("assets/images/cat.png");
-  flashImg = loadImage ("assets/images/flashlightOn.png");
+  flashImg = loadImage("assets/images/flashlightOn.png");
   batteryLogo = loadImage("assets/images/batteryLogo.png");
   healthLogo = loadImage("assets/images/heartLogo.png");
 
@@ -72,6 +72,7 @@ function preload() {
 // Creates objects for the player and three supply
 function setup() {
   createCanvas(1150, 700);
+
   player = new Player(width / 2, height - 120, 5, 50, 50, playerImg);
   firstAid = new FirstAid(random(0, width), random(0, 30), random(3, 6), 30, firstAidImg);
   battery = new Battery(random(0, width), random(0, 30), random(3, 6), 25, batteryImg);
@@ -81,7 +82,7 @@ function setup() {
   //create the battery bar
   batteryBar = new BatteryBar(1020, 80, color(0, 8, 255), 20, batteryLogo);
 
-//create supplies using array
+  //create supplies using array
   for (let i = 0; i < 5; i++) {
     water = new Supply(random(0, width), random(0, 30), random(2, 5), 35, waterImg);
     supply.push(water);
@@ -140,6 +141,8 @@ function mousePressed() {
 // restart game by resetting player and supplies
 function resetGame() {
   state = "GAMEPLAY";
+  player.x = width / 2;
+  player.y = height - 120;
   player.health = 50;
   player.score = 0;
   player.batteryLevel = 50;
@@ -151,32 +154,34 @@ function resetGame() {
 //displayTitle()
 //display title screen
 function displayTitle() {
-  image(titleImg, width/2, height/2, 1150, 700);
+  image(titleImg, width / 2, height / 2, 1150, 700);
+
 }
 //displayInstruction()
 //display instruction screen
 function displayInstruction() {
-  image(instructionImg, width/2, height/2, 1150, 700);
-}
+  image(instructionImg, width / 2, height / 2, 1150, 700);
 
+}
 
 //displayGamewin()
 //tell player that they won after reaching certain score
 function displayGamewin() {
-  image(winImg, width/2, height/2, 1150, 700);
+  image(winImg, width / 2, height / 2, 1150, 700);
 }
 
 
 //displayGameover()
 //display gameover screen when player dies
 function displayGameover() {
-  image(loseImg, width/2, height/2, 1150, 700);
+  image(loseImg, width / 2, height / 2, 1150, 700);
 }
 
 //displayGameplay()
 //display gameplay: player, supply , enemy
 function displayGameplay() {
-  image(backgroundImg, width/2, height/2, 1150, 700);
+  image(backgroundImg, width / 2, height / 2, 1150, 700);
+
   // Handle input for the player
   player.handleInput();
 
@@ -209,7 +214,6 @@ function displayGameplay() {
   player.display();
 
   //display the flashlight
-  flashlight.mousePressed();
   flashlight.display();
   console.log(player.batteryLevel);
 

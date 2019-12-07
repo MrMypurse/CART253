@@ -35,8 +35,11 @@ class BatteryBar {
     pop();
   }
 
-  // width is defined in terms of the player's health
+//updateBattery
+//
+//update the battery bar's width in relation to the flashlight's battery level 
   updateBattery(batteryLevel) {
+    // width is defined in terms of the player's health
     this.width = batteryLevel * 2.5;
   }
 }
