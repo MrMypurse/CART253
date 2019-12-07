@@ -68,10 +68,14 @@ function preload() {
 // Creates objects for the player and three supply
 function setup() {
   createCanvas(1150, 700);
-  player = new Player(width / 2, height - 120, 5, 40, playerImg);
+  player = new Player(width / 2, height - 120, 5, 50, playerImg);
   firstAid = new FirstAid(random(0, width), random(0, 30), random(3, 6), 30, firstAidImg);
   battery = new Battery(random(0, width), random(0, 30), random(3, 6), 25, batteryImg);
   flashlight = new Flashlight(0, 0, 50, flashImg);
+  //create the health bar
+  healthBar = new HealthBar(1020, 50, color(179, 0, 0), 20);
+  //create the battery bar
+  batteryBar = new BatteryBar(1020, 80, color(0, 8, 255), 20);
 
 //create supplies using array
   for (let i = 0; i < 5; i++) {
@@ -86,10 +90,7 @@ function setup() {
     toxicWaste = new Waste(random(0, width), random(0, 30), random(2, 6), 40, toxicWasteImg);
     supply.push(toxicWaste);
   }
-  //create the health bar
-  healthBar = new HealthBar(1020, 50, color(179, 0, 0), 20);
-  //create the battery bar
-  batteryBar = new BatteryBar(1020, 80, color(0, 8, 255), 20);
+
 }
 
 
@@ -135,7 +136,7 @@ function mousePressed() {
 // restart game by resetting player and supplies
 function resetGame() {
   state = "GAMEPLAY";
-  player.health = 40;
+  player.health = 50;
   player.score = 0;
   for (let i = 0; i < supply.length; i++) {
     supply[i].reset();

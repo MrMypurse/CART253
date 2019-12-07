@@ -12,10 +12,10 @@ class Flashlight {
     this.x = x;
     this.y = y;
     //Battery properties
-    this.batteryLevel = batteryLevel;
+    this.maxBatteryLevel = batteryLevel;
     this.batteryLevel = this.maxBatteryLevel;
-    this.batteryLossPerMove = 0.07;
-    this.batteryGainPerEat = 1;
+    this.batteryLossPerMove = 0.5;
+    this.batteryGainPerEat = 2;
     //Display Properties
     imageMode(CENTER);
     rectMode(CORNER);

@@ -128,6 +128,21 @@ class Player {
     }
   }
 
+  handleCharging(battery) {
+    //Calculate distance from this player to the firstaid kit
+    let d3 = dist(this.x, this.y, battery.x, battery.y);
+    //Check if the distance is less than their two radius(an overlap)
+    if (d3 < this.radius + battery.radius) {
+      flashlight.batteryLevel += flashlight.batteryGainPerEat * 5;
+      flashlight.batteryLevel = constrain(flashlight.batteryLevel, 0, flashlight.maxBatteryLevel);
+      //Decrease firstaid kit health by the same amount
+      battery.health -= flashlight.batteryGainPerEat * 5;
+    }
+    //Check if the firstaid kit died and reset it if so
+    if (battery.health < 2) {
+      battery.reset();
+    }
+  }
 
   // display
   //

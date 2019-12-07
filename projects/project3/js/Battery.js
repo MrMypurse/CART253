@@ -78,7 +78,6 @@ class Battery {
       image(this.image, this.x, this.y, this.radius * 2, this.radius * 2);
     }
     pop();
-    console.log(this.health);
   }
 
   // reset
