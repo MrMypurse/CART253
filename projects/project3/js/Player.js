@@ -113,6 +113,7 @@ class Player {
       supply.health -= this.healthGainPerEat * 5;
       // Check if the supply died and reset it if so
       if (supply.health < 3) {
+        beepSound.play();
         this.score = this.score + 1;
         supply.reset();
       }
@@ -136,6 +137,7 @@ class Player {
     }
     //Check if the firstaid kit died and reset it if so
     if (firstAid.health < 2) {
+      beepSound.play();
       firstAid.reset();
     }
   }
@@ -157,6 +159,7 @@ class Player {
     }
     //Check if the battery died and reset it if so
     if (battery.health < 2) {
+      chargeSound.play();
       battery.reset();
     }
   }
@@ -180,6 +183,8 @@ class Player {
   //End the main game when player'health is below 0
   endGame() {
     if (this.health <= 0) {
+      backgroundMusic.stop();
+      failSound.play();
       state = "GAMEOVER";
       return;
     } else if (this.score >= 40) {

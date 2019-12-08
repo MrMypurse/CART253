@@ -1,9 +1,10 @@
-// player-supply Simulation
-// by Pippin Barr
-//
-// Creates a player and three supply (of different sizes and speeds)
-// The player chases the supply using the arrow keys and consumes them.
-// The player loses health over time, so must keep eating to survive.
+// Post-Apocalypse Adventure
+//Coding by Janet Sun
+//Art by Janet Sun
+//Sounds by freesound.org
+// In this mini web game, player plays as a super cat who much collect
+// supplies, while avoiding toxic wastes in order to sruvive.
+// The game uses both keys and mouse to play.
 
 // Our player
 let player;
@@ -29,7 +30,7 @@ let supply = [];
 //set up game state
 let state = "TITLE";
 
-//All images and sounds
+//set up all images
 let waterImg;
 let foodImg;
 let batteryImg;
@@ -44,11 +45,14 @@ let playerImg;
 let flashImg;
 let batteryLogo;
 let heartLogo;
-
+//set up all sounds
+let backgroundMusic;
+let beepSound;
+let clickSound;
 
 // preload()
 //
-//Preload sounds and images
+//Preload images
 function preload() {
   titleImg = loadImage("assets/images/title.gif");
   instructionImg = loadImage("assets/images/instruction.gif");
@@ -64,6 +68,12 @@ function preload() {
   flashImg = loadImage("assets/images/flashlightOn.png");
   batteryLogo = loadImage("assets/images/batteryLogo.png");
   healthLogo = loadImage("assets/images/heartLogo.png");
+  //Preload sounds
+  backgroundMusic = loadSound("assets/sounds/loop.wav");
+  beepSound = loadSound("assets/sounds/beep.wav");
+  clickSound = loadSound("assets/sounds/click.wav");
+  chargeSound = loadSound("assets/sounds/space.wav");
+  failSound = loadSound("assets/sounds/fail.wav");
 
 }
 // setup()
@@ -71,6 +81,7 @@ function preload() {
 // Sets up a canvas
 // Creates objects for the player and three supply
 function setup() {
+  backgroundMusic.loop();
   createCanvas(1150, 700);
 
   player = new Player(width / 2, height - 120, 5, 50, 50, playerImg);
@@ -128,6 +139,7 @@ function draw() {
 //mousePressed()
 // start game when mouse is pressed
 function mousePressed() {
+  clickSound.play();
   if (state === "TITLE") {
     state = "INSTRUCTION";
   } else if (state === "INSTRUCTION") {
@@ -141,6 +153,8 @@ function mousePressed() {
 // restart game by resetting player and supplies
 function resetGame() {
   state = "GAMEPLAY";
+  backgroundMusic.stop();
+  backgroundMusic.loop();
   player.x = width / 2;
   player.y = height - 120;
   player.health = 50;
