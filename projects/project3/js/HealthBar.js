@@ -39,6 +39,6 @@ class HealthBar {
   //update the health bar's width in relation to the player's health
   updateHealth(health) {
     // width is defined in terms of the player's health
-    this.width = health * 2.5;
+    this.width = health * 5;
   }
 }

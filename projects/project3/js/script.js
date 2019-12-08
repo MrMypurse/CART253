@@ -62,7 +62,7 @@ function preload() {
   waterImg = loadImage("assets/images/water.png");
   foodImg = loadImage("assets/images/meat.png");
   batteryImg = loadImage("assets/images/battery.png");
-  firstAidImg = loadImage("assets/images/firstAid.png");
+  firstAidImg = loadImage("assets/images/firstaid.png");
   toxicWasteImg = loadImage("assets/images/badMeat.png");
   playerImg = loadImage("assets/images/cat.png");
   flashImg = loadImage("assets/images/flashlightOn.png");
@@ -82,16 +82,16 @@ function preload() {
 // Creates objects for the player and three supply
 function setup() {
   backgroundMusic.loop();
-  createCanvas(1150, 700);
+  createCanvas(1500, 800);
 
-  player = new Player(width / 2, height - 120, 5, 50, 50, playerImg);
+  player = new Player(width / 2, height - 120, 5, 60, 60, playerImg);
   firstAid = new FirstAid(random(0, width), random(0, 30), random(3, 6), 30, firstAidImg);
   battery = new Battery(random(0, width), random(0, 30), random(3, 6), 25, batteryImg);
   flashlight = new Flashlight(0, 0, flashImg);
   //create the health bar
-  healthBar = new HealthBar(1020, 50, color(179, 0, 0), 20, healthLogo);
+  healthBar = new HealthBar(1420, 50, color(179, 0, 0), 20, healthLogo);
   //create the battery bar
-  batteryBar = new BatteryBar(1020, 80, color(0, 8, 255), 20, batteryLogo);
+  batteryBar = new BatteryBar(1420, 80, color(0, 8, 255), 20, batteryLogo);
 
   //create supplies using array
   for (let i = 0; i < 5; i++) {
@@ -168,33 +168,33 @@ function resetGame() {
 //displayTitle()
 //display title screen
 function displayTitle() {
-  image(titleImg, width / 2, height / 2, 1150, 700);
+  image(titleImg, width / 2, height / 2, 1500, 800);
 
 }
 //displayInstruction()
 //display instruction screen
 function displayInstruction() {
-  image(instructionImg, width / 2, height / 2, 1150, 700);
+  image(instructionImg, width / 2, height / 2, 1500, 800);
 
 }
 
 //displayGamewin()
 //tell player that they won after reaching certain score
 function displayGamewin() {
-  image(winImg, width / 2, height / 2, 1150, 700);
+  image(winImg, width / 2, height / 2, 1500, 800);
 }
 
 
 //displayGameover()
 //display gameover screen when player dies
 function displayGameover() {
-  image(loseImg, width / 2, height / 2, 1150, 700);
+  image(loseImg, width / 2, height / 2, 1500, 800);
 }
 
 //displayGameplay()
 //display gameplay: player, supply , enemy
 function displayGameplay() {
-  image(backgroundImg, width / 2, height / 2, 1150, 700);
+  image(backgroundImg, width / 2, height / 2, 1500, 800);
 
   // Handle input for the player
   player.handleInput();
