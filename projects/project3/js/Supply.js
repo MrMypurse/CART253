@@ -1,4 +1,4 @@
-// supply
+// Supply
 //
 // A class that represents a simple supply that moves
 // on screen based on a noise() function. It can move around
@@ -8,7 +8,7 @@ class Supply {
 
   // constructor
   //
-  // Sets the initial values for the player's properties
+  // Sets the initial values for the supply's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, radius, supplyImage) {
     // Position
@@ -69,7 +69,7 @@ class Supply {
 
   // display
   //
-  // Draw the supply as an ellipse on the canvas
+  // Draw the supply assigned images on the canvas
   // with a radius the same size as its current health.
   display() {
     push();

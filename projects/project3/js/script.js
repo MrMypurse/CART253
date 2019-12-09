@@ -76,6 +76,7 @@ function preload() {
   failSound = loadSound("assets/sounds/fail.wav");
 
 }
+
 // setup()
 //
 // Sets up a canvas
@@ -106,10 +107,7 @@ function setup() {
     toxicWaste = new Waste(random(0, width), random(0, 30), random(2, 6), 40, toxicWasteImg);
     supply.push(toxicWaste);
   }
-
 }
-
-
 
 // draw()
 //
@@ -229,13 +227,12 @@ function displayGameplay() {
 
   //display the flashlight
   flashlight.display();
-  console.log(player.batteryLevel);
 
   // display health (health bar)
   healthBar.updateHealth(player.health);
   healthBar.display();
 
   //display flashlight battery (battery bar)
-  batteryBar.display();
   batteryBar.updateBattery(player.batteryLevel);
+  batteryBar.display();
 }

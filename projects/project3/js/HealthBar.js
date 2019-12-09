@@ -7,7 +7,7 @@
 class HealthBar {
   // constructor
   //
-  // Sets the initial values for the ScoreBar's properties
+  // Sets the initial values for the HealthBar's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, fillColor, height, healthLogoImage) {
     // Position

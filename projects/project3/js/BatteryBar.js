@@ -1,13 +1,13 @@
-// HealthBar
+// BatteryBar
 //
-// A class that represents the player's health
-// the width of bar is relative to the health
+// A class that represents the flashlight's battery level
+// the width of bar is relative to the battery level
 
 
 class BatteryBar {
   // constructor
   //
-  // Sets the initial values for the ScoreBar's properties
+  // Sets the initial values for the Battery Bar's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, fillColor, height, batteryLogoImage) {
     // Position
@@ -23,9 +23,8 @@ class BatteryBar {
 
   // display
   //
-  // Draw the health bar as a rectangle on the canvas
+  // Draw the battery bar as a rectangle on the canvas
   // with a width the same size as its current health.
-
   display() {
     push();
     noStroke();

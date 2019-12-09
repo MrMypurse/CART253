@@ -1,13 +1,13 @@
-// supply
+// Battery
 //
-// A class that represents a simple supply that moves
+// A class that represents a small battery that moves
 // on screen based on a noise() function. It can move around
 // the screen and be consumed by player objects.
 
 class Battery {
   // constructor
   //
-  // Sets the initial values for the player's properties
+  // Sets the initial values for the battery's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, radius, batteryImage) {
     // Position
@@ -30,7 +30,7 @@ class Battery {
 
   // move
   //
-  // Sets velocity based on the noise() function and the supply's speed
+  // Sets velocity based on the noise() function and the battery's speed
   // Moves based on the resulting velocity and handles wrapping
   move() {
     // Set velocity via noise()
@@ -49,7 +49,7 @@ class Battery {
 
   // handleWrapping
   //
-  // Checks if the supply has gone off the canvas and
+  // Checks if the battery has gone off the canvas and
   // wraps it to the other side if so
   handleWrapping() {
     // Off the left or right
@@ -68,7 +68,7 @@ class Battery {
 
   // display
   //
-  // Draw the supply as an ellipse on the canvas
+  // Draw the battery as the assgined image on the canvas
   // with a radius the same size as its current health.
   display() {
     push();

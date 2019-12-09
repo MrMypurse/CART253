@@ -1,4 +1,4 @@
-// player
+// Player
 //
 // A class that represents a simple player
 // controlled by the arrow keys. It can move around
@@ -122,9 +122,9 @@ class Player {
 
   // handleHealing
   //
-  // Takes a supply object as an argument and checks if the player
-  // overlaps it. If so, decreases the supply's health and increases
-  // the player's. If the supply dies, it gets reset.
+  // Takes a first aid object as an argument and checks if the player
+  // overlaps it. If so, decreases the first aid's health and increases
+  // the player's. If the first aid dies, it gets reset.
   handleHealing(firstAid) {
     //Calculate distance from this player to the firstaid kit
     let d2 = dist(this.x, this.y, firstAid.x, firstAid.y);
@@ -144,9 +144,9 @@ class Player {
 
   // handleCharging
   //
-  // Takes a supply object as an argument and checks if the player
-  // overlaps it. If so, decreases the supply's health and increases
-  // the player's. If the supply dies, it gets reset.
+  // Takes a battery object as an argument and checks if the player
+  // overlaps it. If so, decreases the battery's health and increases
+  // the player's. If the battery dies, it gets reset.
   handleCharging(battery) {
     //Calculate distance from this player to the firstaid kit
     let d3 = dist(this.x, this.y, battery.x, battery.y);

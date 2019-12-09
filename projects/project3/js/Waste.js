@@ -1,6 +1,6 @@
-// Toxic Waster
+// Waste
 //
-// A class that represents a waster that moves
+// A class that represents a toxic waste that moves
 // on screen based on a noise() function. It can move around
 // the screen and consumed player objects.
 
@@ -8,15 +8,9 @@
 class Waste {
   // constructor
   //
-  // Sets the initial values for the player's properties
+  // Sets the initial values for the waste's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, radius, wasteImage) {
-    //super(x, y, speed, fillColor, radius);
-    // constructor
-    //
-    // Sets the initial values for the player's properties
-    // Either sets default values or uses the arguments provided
-    // Position
     this.x = x;
     this.y = y;
     // Velocity and speed
@@ -36,7 +30,7 @@ class Waste {
 
   // move
   //
-  // Sets velocity based on the noise() function and the supply's speed
+  // Sets velocity based on the noise() function and the waste's speed
   // Moves based on the resulting velocity and handles wrapping
   move() {
     // Set velocity via noise()
@@ -74,7 +68,7 @@ class Waste {
 
   // display
   //
-  // Draw the supply as an ellipse on the canvas
+  // Draw the waste as the assigned image on the canvas
   // with a radius the same size as its current health.
   display() {
     push();

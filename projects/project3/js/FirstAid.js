@@ -1,13 +1,13 @@
-// supply
+// FirstAid
 //
-// A class that represents a simple supply that moves
+// A class that represents a first aid kit that moves
 // on screen based on a noise() function. It can move around
 // the screen and be consumed by player objects.
 
 class FirstAid {
   // constructor
   //
-  // Sets the initial values for the player's properties
+  // Sets the initial values for the first aid kit's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, radius, firstAidImage) {
     // Position
@@ -30,7 +30,7 @@ class FirstAid {
 
   // move
   //
-  // Sets velocity based on the noise() function and the supply's speed
+  // Sets velocity based on the noise() function and the first aid kit's speed
   // Moves based on the resulting velocity and handles wrapping
   move() {
     // Set velocity via noise()
@@ -49,7 +49,7 @@ class FirstAid {
 
   // handleWrapping
   //
-  // Checks if the supply has gone off the canvas and
+  // Checks if the first aid kit has gone off the canvas and
   // wraps it to the other side if so
   handleWrapping() {
     // Off the left or right
@@ -68,7 +68,7 @@ class FirstAid {
 
   // display
   //
-  // Draw the supply as an ellipse on the canvas
+  // Draw the first aid kit as the assgined image on the canvas
   // with a radius the same size as its current health.
   display() {
     push();
